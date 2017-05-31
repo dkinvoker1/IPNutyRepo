@@ -17,5 +17,11 @@ namespace IPNuty.Models
         public ApplicationDbContext() : base("MyConnectionString")
         {
         }
+
+        public static ApplicationDbContext Create()
+        {
+            return new ApplicationDbContext();
+        }
+
     }
 }
