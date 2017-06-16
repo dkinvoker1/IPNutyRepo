@@ -137,6 +137,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Styles\Tabela.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -145,14 +147,35 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SingerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Collections\OrdersCollection.cs" />
+    <Compile Include="Models\Collections\SheetMusicCollection.cs" />
+    <Compile Include="Models\Collections\SingersCollection.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Managers\Admin\OrdersManager.cs" />
+    <Compile Include="Models\Managers\Admin\SheetMusicManager.cs" />
+    <Compile Include="Models\Managers\Admin\SingersManager.cs" />
+    <Compile Include="Models\Managers\Singers\OrdersManager.cs" />
+    <Compile Include="Models\Managers\Singers\SheetMusicManager.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\SheetMusic.cs" />
+    <Compile Include="Models\Singer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Admin\AddNewSheetMusicModel.cs" />
+    <Compile Include="ViewModels\Admin\AddNewSingerViewModel.cs" />
+    <Compile Include="ViewModels\Admin\OrderViewModel.cs" />
+    <Compile Include="ViewModels\Admin\SheetMusicListAcctualizationViewModel.cs" />
+    <Compile Include="ViewModels\Admin\SingersListAcctualizationViewModel.cs" />
+    <Compile Include="ViewModels\Admin\SingersSheetMusicListAcctualizationViewModel.cs" />
+    <Compile Include="ViewModels\Singers\OrderViewModel.cs" />
+    <Compile Include="ViewModels\Singers\SheetMusicListAcctualizationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -166,6 +189,16 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Admin\AddNewSheetMusic.cshtml" />
+    <Content Include="Views\Admin\AddNewSinger.cshtml" />
+    <Content Include="Views\Admin\Order.cshtml" />
+    <Content Include="Views\Admin\SheetMusicListAcctualization.cshtml" />
+    <Content Include="Views\Admin\SingerListAcctualization.cshtml" />
+    <Content Include="Views\Admin\SingersSheetMusicListAcctualization.cshtml" />
+    <Content Include="Views\Admin\Home.cshtml" />
+    <Content Include="Views\Singer\Home.cshtml" />
+    <Content Include="Views\Singer\Order.cshtml" />
+    <Content Include="Views\Singer\SheetMusicList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

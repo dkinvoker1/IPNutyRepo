@@ -1,0 +1,24 @@
+﻿@model IPNuty.ViewModels.Admin.AddNewSingerViewModel
+@{
+    ViewBag.Title = "Dodaj nowego chórzystę";
+}
+
+<h2>Dodaj nowego chórzystę do bazy</h2>
+<div>
+    <form onsubmit="if (this.name.value == ''||this.lastname.value == '')
+{ alert('Zanim wyślesz formularz wypełnij wszystkie pola!');
+return false }
+else if (this.name.value != '' ||this.lastname.value != ''){ alert('Pomyślnie dodano użytkownika');
+    return true } ">
+        <h5>Imię:</h5><input type="text" name="name" /><br />
+        <h5>Nazwisko:</h5><input type="text" name="lastname" /><br />
+        <input type="submit" value="OK" /><br />
+    </form>
+
+</div>
+<div>
+    <br />
+    <input type="button" value="Dodaj nuty chórzysty" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization")'" />
+</div>
+
+

@@ -1,0 +1,38 @@
+﻿@*@model Tuple<IEnumerable<Nuty.Models.SheetMusic>, IEnumerable<Nuty.Models.Singer>>*@
+@model IEnumerable<IPNuty.Models.SheetMusic>
+
+@{
+    ViewBag.Title = "Lista nut osoby XYZ";
+}
+
+<h2>Lista nut osoby XYZ</h2>
+<p>
+    Wyświetlamy całą bazę nut. Najpierw są wyświetlane nuty posiadane, później te nieposiadane. Istnieje możliwość dodawania nut do użytkownika i usuwania ich.<br />
+    Trzeba dostać się do danych tej jednej konkretnej osoby - jak to zrobić?
+</p>
+
+<div>
+    <table>
+        <tr>
+            <td>Autor</td>
+            <td>Tytuł</td>
+            <td>Rodzaj</td>
+            <td>Czy posiadane</td>
+            <td>Dodaj/usuń</td>
+        </tr>
+        @foreach (var item in Model) //dla wszystkich dostępnych nut w bazie
+        {
+            <tr>
+                <td>@item.Author</td>
+                <td>@item.Title</td>
+                <td>...</td>
+                @* Sprawdzenie, czy osoba posiada te nuty *@
+                <td>tak/nie</td>
+                @* if posiada - usuń, if nie posiada - dodaj *@
+                <td><button>Usuń nuty</button></td>
+            </tr>
+        }
+    </table>
+
+</div>
+

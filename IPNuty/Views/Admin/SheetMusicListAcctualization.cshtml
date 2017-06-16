@@ -1,0 +1,32 @@
+﻿@model IEnumerable<IPNuty.Models.SheetMusic>
+@{
+    ViewBag.Title = "Baza nut chóru";
+}
+
+<h2>Aktualizuj bazę dostępnych nut</h2>
+
+<hr />
+<div>
+    <input type="button" value="Dodaj nowy zestaw nut" onclick="location.href='@Url.Action("AddNewSheetMusic")'" />
+    @*Najpierw podajemy widok, potem ew. folder*@
+</div>
+<div>
+    <table>
+        <tr>
+            <td>Autor</td>
+            <td>Tytuł</td>
+            <td>Rodzaj</td>
+            <td>Akcja</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Author</td>
+                <td>@item.Title</td>
+                <td>...</td>
+                <td><button>Usuń nuty</button></td>
+            </tr>
+        }
+    </table>
+
+</div>

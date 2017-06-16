@@ -1,0 +1,98 @@
+﻿@model IEnumerable<IPNuty.Models.Order>
+@{
+    ViewBag.Title = "Zamówienia chórzystów"; //to jest tytuł strony
+}
+
+<h2>Zamówienia chórzystów</h2>
+<p>zwrocic uwage na nadmiarowe nuty, by na tej podstawie wyswietlac co trzeba drukowac a co jest na stanie. tabelka z iloscia do druku i z tym co jest na stanie</p>
+<p>po kliknieciu checkboxow generuje sie lista zamowien, najlepiej do pdfa</p>
+<hr />
+
+
+
+<div>
+    <form action="/action_page.php" method="get">
+        <table>
+            <tr>
+                <td>Numer zamówienia</td>
+                <td>Zamawiający</td>
+                <td>Data złożenia zamówienia</td>
+                <td>Zamówiono</td>
+                <td>Realizacja</td>
+                <td>Anuluj</td>
+                <td>Dodaj do Podsumowania</td>
+            </tr>
+            @foreach (var item in Model)
+            {
+                if (item.orderedSheetMusicList != null)
+                {
+                    for (int i = 0; i < item.orderedSheetMusicList.Count; i++)
+                    {
+                        <tr>
+                            <td>@item.id</td>
+                            <td>@item.singer.Name @item.singer.LastName</td>
+                            <td>@item.orderTime.ToShortDateString()</td>
+                            <td>@item.orderedSheetMusicList[i].Author @item.orderedSheetMusicList[i].Title</td>
+                            @if (!item.completed)
+                        {
+                                <td>
+                                    <button>Zrealizuj zamówienie</button>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>Wykonane</td>
+                            }
+                            <td>
+                                <button>Anuluj zamówienie</button>
+                            </td>
+                            <td><input type="checkbox" name="nuty">Zamów<br></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td>@item.id</td>
+                        <td>@item.singer.Name @item.singer.LastName</td>
+                        <td>@item.orderTime.ToShortDateString()</td>
+                        <td>Brak zamówień</td>
+                        @if (!item.completed)
+                    {
+                            <td>
+                                <button>Zrealizuj zamówienie</button>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>Wykonane</td>
+                        }
+                        <td>
+                            <button>Anuluj zamówienie</button>
+                        </td>
+                        <td><input type="checkbox" name="nuty">Zamów<br></td>
+                    </tr>
+                }
+            }
+        </table>
+        @* tutaj trzeba zapisać wszystkie checkboxy do listy*@
+        <input type="submit" value="Wykonaj podsumowanie">
+
+    </form>
+</div>
+
+<div>
+
+    <h2>Tabelka właściwych zamówień</h2>
+    <table>
+        <tr>
+            <td>Numer zamówienia</td>
+            <td>Autor</td>
+            <td>Tytuł</td>
+            <td>Zamówiona ilość</td>
+            <td>Dostępne egzemplarze</td>
+            <td>Potrzebna ilość</td>
+        </tr>
+        @* Kolejne wiersze to wartości z listy (po zaznaczeniu checkboxów). Dostępne egzemplarze pobierane są z bazy, Potrzebna ilość to różnica między nimi *@
+    </table>
+</div>

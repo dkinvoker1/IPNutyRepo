@@ -1,0 +1,48 @@
+﻿@model IEnumerable<IPNuty.Models.Singer>
+@{
+    ViewBag.Title = "Lista członków chóru";
+}
+
+<h2>Aktualizuj listę chórzystów</h2>
+<p> Odnośnik do jego listy posiadanych nut</p>
+<hr />
+<div>
+    <input type="button" value="Dodaj nowego członka" onclick="location.href='@Url.Action("AddNewSinger")'" />
+    @*Najpierw podajemy widok, potem ew. folder*@
+</div>
+
+<div>
+    <table>
+        <tr>
+            <td>Imię</td>
+            <td>Nazwisko</td>
+            <td>Członek od:</td>
+            <td>Aktywność</td>
+            <td>Usuń</td>
+            <td>Posiadane nuty</td>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.LastName</td>
+                <td>@item.JoiningDate.ToShortDateString()</td>
+                @if (item.Activicity)
+                {
+                    <td><button>Aktywny</button></td>
+                }
+                else
+                {
+                    <td><button>Nieaktywny</button></td>
+                }
+                <td><button>Usuń członka</button></td>
+                <td><input type="button" value="Przeglądaj" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization")'" /></td>
+
+            </tr>
+        }
+    </table>
+</div>
+
+
+
