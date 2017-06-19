@@ -21,6 +21,7 @@ else if (this.title.value != '' || this.author.value != '' || this.type.value !=
 </div>
 
 <div>
-    <input type="button" value="Wróc do listy nut" onclick="location.href='@Url.Action("SheetMusicListAcctualization")'" />
+    @Html.ActionLink("Wróc do listy nut", "SheetMusicListAcctualization")
+    @*<input type="button" value="Wróc do listy nut" onclick="location.href='@Url.Action("SheetMusicListAcctualization")'" />*@
     @*Najpierw podajemy widok, potem ew. folder*@
 </div>

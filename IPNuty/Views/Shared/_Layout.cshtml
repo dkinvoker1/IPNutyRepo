@@ -9,10 +9,22 @@
     <div id="header">
         <h1><a href="/">FRESCO</a></h1>
         <ul id="navlist">
-            <li><a href="/Admin/Home/">Wyloguj</a></li>
-            <li><a href="/Admin/SingerListAcctualization/">Lista chórzystów</a></li>
-            <li><a href="/Admin/SheetMusicListAcctualization/">Baza nut</a></li>
-            <li><a href="/Admin/Order/">Zamówienia</a></li>
+            @if (Request.IsAuthenticated)
+            {
+                <li><a href="/Admin/Home/">Wyloguj</a></li>
+                <li><a href="/Admin/SingerListAcctualization/">Lista chórzystów</a></li>
+                <li><a href="/Admin/SheetMusicListAcctualization/">Baza nut</a></li>
+                <li><a href="/Admin/Order/">Zamówienia</a></li>
+            }
+            else
+            {
+                <li><a href="/Account/Login/">Zaloguj</a></li>
+                @*<template>Tego ma tutaj nie być, to jest testowe</template>*@
+                <li><a href="/Admin/SingerListAcctualization/">Lista chórzystów</a></li>
+                <li><a href="/Admin/SheetMusicListAcctualization/">Baza nut</a></li>
+                <li><a href="/Admin/Order/">Zamówienia</a></li>
+            }
+            
         </ul>
     </div>
 

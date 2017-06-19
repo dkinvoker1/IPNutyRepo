@@ -7,7 +7,10 @@
 <p> Odnośnik do jego listy posiadanych nut</p>
 <hr />
 <div>
-    <input type="button" value="Dodaj nowego członka" onclick="location.href='@Url.Action("AddNewSinger")'" />
+    @Html.ActionLink("Dodaj nowego członka chóru", "AddNewSinger")
+
+
+    @*<input type="button" value="Dodaj nowego członka" onclick="location.href='@Url.Action("AddNewSinger")'" />*@
     @*Najpierw podajemy widok, potem ew. folder*@
 </div>
 

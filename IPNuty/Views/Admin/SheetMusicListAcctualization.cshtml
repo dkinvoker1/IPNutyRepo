@@ -7,7 +7,8 @@
 
 <hr />
 <div>
-    <input type="button" value="Dodaj nowy zestaw nut" onclick="location.href='@Url.Action("AddNewSheetMusic")'" />
+    @Html.ActionLink("Dodaj nowy zestaw nut", "AddNewSheetMusic")
+    @*<input type="button" value="Dodaj nowy zestaw nut" onclick="location.href='@Url.Action("AddNewSheetMusic")'" />*@
     @*Najpierw podajemy widok, potem ew. folder*@
 </div>
 <div>

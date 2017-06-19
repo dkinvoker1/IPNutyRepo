@@ -12,13 +12,16 @@ else if (this.name.value != '' ||this.lastname.value != ''){ alert('Pomyślnie d
     return true } ">
         <h5>Imię:</h5><input type="text" name="name" /><br />
         <h5>Nazwisko:</h5><input type="text" name="lastname" /><br />
-        <input type="submit" value="OK" /><br />
+        @*<input type="submit" value="OK" />*@
+        @Html.ActionLink("Stwórz konto dla chórzysty", "Register", "Account")
+        <br />
     </form>
 
 </div>
 <div>
     <br />
-    <input type="button" value="Dodaj nuty chórzysty" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization")'" />
+    @Html.ActionLink("Dodaj nuty chórzysty", "SingersSheetMusicListAcctualization")
+    @*<input type="button" value="Dodaj nuty chórzysty" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization")'" />*@
 </div>
 
 
