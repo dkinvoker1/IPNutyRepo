@@ -15,7 +15,7 @@ namespace IPNuty.Models
 
         private Singer(Builder builder)
         {
-            this.Name = builder.Name;
+             this.Name = builder.Name;
             this.LastName = builder.LastName;
         }
 
