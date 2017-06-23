@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using IPNuty.ViewModels.Admin;
+using IPNuty.Models;
 
 namespace IPNuty.Controllers
 {
@@ -32,6 +33,7 @@ namespace IPNuty.Controllers
             return View(sheetMusicListAcctualization.allSheetMusicList);
         }
 
+
         //
         // GET: /Admin/
         public ActionResult SingerListAcctualization()
@@ -45,8 +47,15 @@ namespace IPNuty.Controllers
         public ActionResult SingersSheetMusicListAcctualization()
         {
             var singersSheetMusicListAcctualization = new SingersSheetMusicListAcctualizationViewModel();
-            return View(singersSheetMusicListAcctualization.allSheetMusicList);
+            return View(singersSheetMusicListAcctualization);
         }
+
+        //public ActionResult SingersSheetMusicListAcctualization(Singer singer)
+        //{
+        //    var singersSheetMusicListAcctualization = new SingersSheetMusicListAcctualizationViewModel();
+        //    singersSheetMusicListAcctualization.singer = singer;
+        //    return View(singersSheetMusicListAcctualization);
+        //}
 
         public ActionResult AddNewSinger()
         {

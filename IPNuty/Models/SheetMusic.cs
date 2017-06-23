@@ -16,16 +16,17 @@ namespace IPNuty.Models
             rozrywkowe,
             sakralne,
             musicalowe,
-            ludowe;
+            ludowe,
+            inne
         }
 
         public MusicType Type { get; set; }
 
-        public SheetMusic(string title, string author, MusicType Type)
+        public SheetMusic(string title, string author, int Type)
         {
             this.Title = title;
             this.Author = author;
-            this.Type = Type;
+            this.Type = (MusicType)Type;
         }
     }
 }

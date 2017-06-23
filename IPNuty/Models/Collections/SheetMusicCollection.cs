@@ -29,14 +29,15 @@ namespace IPNuty.Models.Collections
         private SheetMusicCollection()
         {
             // tu docelowo pobrana lista z bazy danych
+            // dodatkowo musi znaleźć się pole z informacją, ile mamy nut na stanie
             this.AllSheetMusicList = new List<SheetMusic>();
 
             // tymczasowo!
-            AllSheetMusicList.Add(new SheetMusic("Earth Song", "Frank Tichieli"));
-            AllSheetMusicList.Add(new SheetMusic("Lux Aurumque", "Eric Whitacre"));
-            AllSheetMusicList.Add(new SheetMusic("Sacrum Convivium", "Dawid Kusz OP"));
-            AllSheetMusicList.Add(new SheetMusic("All That Hath Life and Breath Praise Ye the Lord", "Rene Clausen"));
-            AllSheetMusicList.Add(new SheetMusic("All of me", "John Legend"));
+            AllSheetMusicList.Add(new SheetMusic("Earth Song", "Frank Tichieli", 5));
+            AllSheetMusicList.Add(new SheetMusic("Lux Aurumque", "Eric Whitacre", 2));
+            AllSheetMusicList.Add(new SheetMusic("Sacrum Convivium", "Dawid Kusz OP", 2));
+            AllSheetMusicList.Add(new SheetMusic("All That Hath Life and Breath Praise Ye the Lord", "Rene Clausen", 2));
+            AllSheetMusicList.Add(new SheetMusic("All of me", "John Legend", 1));
         }
 
     }
