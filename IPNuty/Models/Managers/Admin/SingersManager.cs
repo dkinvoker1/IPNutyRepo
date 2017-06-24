@@ -10,7 +10,7 @@ namespace IPNuty.Models.Managers.Admin
 {
     public class SingersManager
     {
-        public List<Singer> allSingersList = SingersCollection.Instance.AllSingersList;
+        public List<Singer> allSingersList = SingersCollection.GetAllSingers();
 
         public Singer CreateNewSinger(string name, string lastName)
         {

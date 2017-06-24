@@ -40,7 +40,7 @@ namespace IPNuty.Models.Managers.Singers
                 bool isEmpty = !order.orderedSheetMusicList.Any();
                 if (!isEmpty)
                 {
-                    OrdersCollection.Instance.AllOrdersList.Add(order);
+                    OrdersCollection.GetAllOrdersList().Add(order);
                 }
             }
         }

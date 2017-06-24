@@ -10,6 +10,6 @@ namespace IPNuty.ViewModels.Admin
 {
     public class OrderViewModel
     {
-        public List<Order> AllOrdersList = OrdersCollection.Instance.AllOrdersList;
+        public List<Order> AllOrdersList = OrdersCollection.GetAllOrdersList();
     }
 }

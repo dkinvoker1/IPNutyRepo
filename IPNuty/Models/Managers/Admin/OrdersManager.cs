@@ -8,7 +8,7 @@ namespace IPNuty.Models.Managers.Admin
 {
     public class OrdersManager
     {
-        public List<Order> allOrdersList = OrdersCollection.Instance.AllOrdersList;
+        public List<Order> allOrdersList = OrdersCollection.GetAllOrders();
 
         public void CompleteOrder(Order order)
         {

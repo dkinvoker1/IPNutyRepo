@@ -5,38 +5,16 @@ using System.Web;
 
 namespace IPNuty.Models.Collections
 {
-    public sealed class SingersCollection
+    public static class SingersCollection
     {
-        #region Singleton
-
-        private static SingersCollection singersList = null;
-        public static SingersCollection Instance
+        public static List<Singer> GetAllSingers()
         {
-            get
+            using (ApplicationDbContext dbcontext = new ApplicationDbContext())
             {
-                if (singersList == null)
-                {
-                    singersList = new SingersCollection();
-                }
-                return singersList;
+                List<Singer> AllSheetMusic = dbcontext.Singers.ToList();
+                return AllSheetMusic;
             }
+
         }
-
-        #endregion
-
-        public List<Singer> AllSingersList { get; set; }
-
-        private SingersCollection()
-        {
-            // tu docelowo pobrana lista z bazy danych
-            this.AllSingersList = new List<Singer>();
-            // tymczasowo!
-            AllSingersList.Add(new Singer.Builder("Magda", "Magdzińska").build());
-            AllSingersList.Add(new Singer.Builder("Adam", "Adamowicz").build());
-            AllSingersList.Add(new Singer.Builder("Krzysztof", "Krzysztofiński").build());
-            AllSingersList.Add(new Singer.Builder("Anna", "Anińska").build());
-            AllSingersList.Add(new Singer.Builder("Katarzyna", "Kasińska").build());
-        }
-
     }
 }

@@ -12,6 +12,6 @@ namespace IPNuty.ViewModels.Admin
     public class SingersListAcctualizationViewModel
     {
         public Singer singer;
-        public List<Singer> allSingersList = SingersCollection.Instance.AllSingersList;
+        public List<Singer> allSingersList = SingersCollection.GetAllSingers();
     }
 }
