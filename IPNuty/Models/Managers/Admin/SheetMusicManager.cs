@@ -14,7 +14,19 @@ namespace IPNuty.Models.Managers.Admin
 
         public void AddSheetMusic(SheetMusic sheetMusic)
         {
-            allSheetMusicList.Add(sheetMusic);
+            using (var db = new ApplicationDbContext())
+            {
+                var nuta1 = new SheetMusic("Earth Song", "Frank Tichieli", 5);
+                var nuta2 = new SheetMusic("Lux Aurumque", "Eric Whitacre", 2);
+
+                var muzyk = new Singer.Builder("Magda", "Magdzińska").build();
+
+                //db.Singers.Add(muzyk);
+                db.SheetsOfMusic.Add(nuta1);
+                db.SaveChanges();
+                //allSheetMusicList=db.SheetsOfMusic.Select
+            }
+            
         }
 
         public void RemoveSheetMusic(SheetMusic sheetMusic)

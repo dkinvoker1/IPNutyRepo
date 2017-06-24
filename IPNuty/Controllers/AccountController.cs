@@ -126,18 +126,17 @@ namespace IPNuty.Controllers
         public ActionResult LogOff()
         {
             //tymczasowo bardzo, nie wiedziałem gdzie to wrzucić żeby wytestować
-            using (var db = new ApplicationDbContext())
-            {
-                var nuta1 = new SheetMusic("Earth Song", "Frank Tichieli", 5);
-                var nuta2 = new SheetMusic("Lux Aurumque", "Eric Whitacre", 2);
+            //using (var db = new ApplicationDbContext())
+            //{
+            //    var nuta1 = new SheetMusic("Earth Song", "Frank Tichieli", 5);
+            //    var nuta2 = new SheetMusic("Lux Aurumque", "Eric Whitacre", 2);
 
-                var muzyk = new Singer.Builder("Magda", "Magdzińska").build();
+            //    var muzyk = new Singer.Builder("Magda", "Magdzińska").build();
 
-                //db.Singers.Add(muzyk);
-                db.SheetsOfMusic.Add(nuta1);
-                db.SaveChanges();
-
-            }
+            //    //db.Singers.Add(muzyk);
+            //    db.SheetsOfMusic.Add(nuta1);
+            //    db.SaveChanges();
+            //}
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
