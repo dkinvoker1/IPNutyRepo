@@ -22,6 +22,10 @@ namespace IPNuty.Models
 
         public MusicType Type { get; set; }
 
+        public SheetMusic()
+        {
+
+        }
         public SheetMusic(string title, string author, int Type)
         {
             this.Title = title;

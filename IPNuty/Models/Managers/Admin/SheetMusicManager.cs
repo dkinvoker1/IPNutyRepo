@@ -30,7 +30,8 @@ namespace IPNuty.Models.Managers.Admin
 
         public void RemoveSheetMusic(SheetMusic sheetMusic)
         {
-            allSheetMusicList.Remove(sheetMusic);
+            //do napisania
+            //allSheetMusicList.Remove(sheetMusic);
         }
 
         public void SheetMusicTitleUpdate(SheetMusic sheetMusic, string title)

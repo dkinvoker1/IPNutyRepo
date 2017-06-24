@@ -5,21 +5,20 @@ using System.Web;
 
 namespace IPNuty.Models.Collections
 {
-    public sealed class SheetMusicCollection
+
+    public static class SheetMusicCollection
     {
-        public static class SheetMusicCollection
+
+        public static List<SheetMusic> GetAllSheetMusic()
         {
 
-            public static List<SheetMusic> GetAllSheetMusic()
+            using (ApplicationDbContext dbcontext = new ApplicationDbContext())
             {
-
-                using (ApplicationDbContext dbcontext = new ApplicationDbContext())
-                {
-                    List<SheetMusic> AllSheetMusic = dbcontext.SheetsOfMusic.toList();
-                }
+                List<SheetMusic> AllSheetMusic = dbcontext.SheetsOfMusic.ToList();
                 return AllSheetMusic;
             }
-
+            
         }
+
     }
 }
