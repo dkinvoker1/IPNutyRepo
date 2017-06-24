@@ -7,6 +7,7 @@ namespace IPNuty.Models
 {
     public class Singer
     {
+        public int SingerId { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public bool Activicity { get; set; }
@@ -17,6 +18,7 @@ namespace IPNuty.Models
         {
             this.Name = builder.Name;
             this.LastName = builder.LastName;
+            this.JoiningDate = builder.JoiningDate;
         }
 
         public class Builder

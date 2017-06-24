@@ -1,9 +1,11 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace IPNuty.Models
 {
@@ -14,6 +16,9 @@ namespace IPNuty.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Singer> Singers { get; set; }
+        public DbSet<SheetMusic> SheetsOfMusic { get; set; }
+
         public ApplicationDbContext() : base("MyConnectionString")
         {
         }
