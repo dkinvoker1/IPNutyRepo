@@ -10,7 +10,6 @@ namespace IPNuty.Models.Managers.Admin
 {
     public class SheetMusicManager
     {
-        public List<SheetMusic> allSheetMusicList = SheetMusicCollection.Instance.AllSheetMusicList;
 
         public void AddSheetMusic(SheetMusic sheetMusic)
         {

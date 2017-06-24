@@ -12,6 +12,6 @@ namespace IPNuty.ViewModels.Admin
     public class SingersSheetMusicListAcctualizationViewModel
     {
         public Singer singer;
-        public List<SheetMusic> allSheetMusicList = SheetMusicCollection.Instance.AllSheetMusicList;
+        public List<SheetMusic> allSheetMusicList = SheetMusicCollection.GetAllSheetMusic();
     }
 }

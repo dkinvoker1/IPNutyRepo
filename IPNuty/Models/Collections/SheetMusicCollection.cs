@@ -7,53 +7,19 @@ namespace IPNuty.Models.Collections
 {
     public sealed class SheetMusicCollection
     {
-        #region Singleton
-
-        private static SheetMusicCollection sheetMusicList = null;
-        public static SheetMusicCollection Instance
+        public static class SheetMusicCollection
         {
-            get
+
+            public static List<SheetMusic> GetAllSheetMusic()
             {
-                if (sheetMusicList == null)
+
+                using (ApplicationDbContext dbcontext = new ApplicationDbContext())
                 {
-                    sheetMusicList = new SheetMusicCollection();
+                    List<SheetMusic> AllSheetMusic = dbcontext.SheetsOfMusic.toList();
                 }
-                return sheetMusicList;
+                return AllSheetMusic;
             }
-        }
-
-        #endregion
-
-        public List<SheetMusic> AllSheetMusicList { get; set; }
-
-        private SheetMusicCollection()
-        {
-            // tu docelowo pobrana lista z bazy danych
-            // dodatkowo musi znaleźć się pole z informacją, ile mamy nut na stanie
-            this.AllSheetMusicList = new List<SheetMusic>();
-
-            // tymczasowo!
-            AllSheetMusicList.Add(new SheetMusic("Earth Song", "Frank Tichieli", 5));
-            AllSheetMusicList.Add(new SheetMusic("Lux Aurumque", "Eric Whitacre", 2));
-            AllSheetMusicList.Add(new SheetMusic("Sacrum Convivium", "Dawid Kusz OP", 2));
-            AllSheetMusicList.Add(new SheetMusic("All That Hath Life and Breath Praise Ye the Lord", "Rene Clausen", 2));
-            AllSheetMusicList.Add(new SheetMusic("All of me", "John Legend", 1));
-
-
-            //tymczasowo bardzo, nie wiedziałem gdzie to wrzucić żeby wytestować
-            //using (var db = new ApplicationDbContext())
-            //{
-            //    var nuta1 = new SheetMusic("Earth Song", "Frank Tichieli", 5);
-            //    var nuta2 = new SheetMusic("Lux Aurumque", "Eric Whitacre", 2);
-
-            //    var muzyk = new Singer.Builder("Magda", "Magdzińska").build();
-
-            //    db.Singers.Add(muzyk);
-            //    db.SaveChanges();
-
-            //}
 
         }
-
     }
 }
