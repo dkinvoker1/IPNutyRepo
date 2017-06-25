@@ -139,6 +139,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="NutyClassDiagram.cd" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -177,16 +178,12 @@
     <Compile Include="Migrations\201706240253043_Singerzy.Designer.cs">
       <DependentUpon>201706240253043_Singerzy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706252225591_Orders.cs" />
-    <Compile Include="Migrations\201706252225591_Orders.Designer.cs">
-      <DependentUpon>201706252225591_Orders.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="ViewModels\LoginAndRegister\AccountViewModels.cs" />
     <Compile Include="Models\Collections\OrdersCollection.cs" />
     <Compile Include="Models\Collections\SheetMusicCollection.cs" />
     <Compile Include="Models\Collections\SingersCollection.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\DBConnection\IdentityModels.cs" />
     <Compile Include="Models\Managers\Admin\OrdersManager.cs" />
     <Compile Include="Models\Managers\Admin\SheetMusicManager.cs" />
     <Compile Include="Models\Managers\Admin\SingersManager.cs" />
@@ -246,9 +243,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706240253043_Singerzy.resx">
       <DependentUpon>201706240253043_Singerzy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706252225591_Orders.resx">
-      <DependentUpon>201706252225591_Orders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
