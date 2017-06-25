@@ -16,6 +16,7 @@ namespace IPNuty.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Order> Orders { get; set; }
         public DbSet<Singer> Singers { get; set; }
         public DbSet<SheetMusic> SheetsOfMusic { get; set; }
 

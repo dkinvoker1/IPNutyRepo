@@ -11,9 +11,9 @@ namespace IPNuty.Models.Managers.Singers
     {
         Order order;
 
-        public void CreateNewOrder(int id, Singer singer)
+        public void CreateNewOrder( Singer singer)
         {
-            order = new Order.Builder(id, singer).Build();
+            order = new Order.Builder(singer).Build();
         }
 
         public void AddSheetMusic(SheetMusic sheetMusic)
@@ -40,7 +40,7 @@ namespace IPNuty.Models.Managers.Singers
                 bool isEmpty = !order.orderedSheetMusicList.Any();
                 if (!isEmpty)
                 {
-                    OrdersCollection.GetAllOrdersList().Add(order);
+                    //OrdersCollection.GetAllOrdersList().Add(order);
                 }
             }
         }

@@ -7,7 +7,7 @@ namespace IPNuty.Models
 {
     public class Order
     {
-        public int id;
+        public int OrderId { get; set; }
         public Singer singer;
         public List<SheetMusic> orderedSheetMusicList;
         public DateTime orderTime;
@@ -15,21 +15,18 @@ namespace IPNuty.Models
 
         public Order(Builder builder)
         {
-            this.id = builder.id;
             this.singer = builder.singer;
         }
 
         public class Builder
         {
-            public int id = 0;
             public Singer singer = null;
             public List<SheetMusic> orderedSheetMusicList = null;
             public DateTime orderTime = DateTime.Now;
             public bool completed = false;
 
-            public Builder(int id, Singer singer)
+            public Builder(Singer singer)
             {
-                this.id = id;
                 this.singer = singer;
             }
 

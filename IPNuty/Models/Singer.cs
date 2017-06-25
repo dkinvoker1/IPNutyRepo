@@ -14,6 +14,10 @@ namespace IPNuty.Models
         public DateTime JoiningDate { get; set; }
         public List<SheetMusic> SingerSheetMusicList { get; set; }
 
+        public Singer()
+        {
+        }
+
         private Singer(Builder builder)
         {
             this.Name = builder.Name;

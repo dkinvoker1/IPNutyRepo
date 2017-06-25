@@ -7,11 +7,11 @@ namespace IPNuty.Models.Collections
 {
     public static class OrdersCollection
     {
-        public static List<Oder> GetAllOrders()
+        public static List<Order> GetAllOrders()
         {
             using (ApplicationDbContext dbcontext = new ApplicationDbContext())
             {
-                List<Order> AllOdersList = dbcontext.Orders.ToList();
+                List<Order> AllOrdersList = dbcontext.Orders.ToList();
                 return AllOrdersList;
             }
 
