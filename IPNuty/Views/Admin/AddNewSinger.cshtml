@@ -4,20 +4,42 @@
 }
 
 <h2>Dodaj nowego chórzystę do bazy</h2>
-<div>
-    <form onsubmit="if (this.name.value == ''||this.lastname.value == '')
-{ alert('Zanim wyślesz formularz wypełnij wszystkie pola!');
-return false }
-else if (this.name.value != '' ||this.lastname.value != ''){ alert('Pomyślnie dodano użytkownika');
-    return true } ">
-        <h5>Imię:</h5><input type="text" name="name" /><br />
-        <h5>Nazwisko:</h5><input type="text" name="lastname" /><br />
-        @*<input type="submit" value="OK" />*@
-        @Html.ActionLink("Stwórz konto dla chórzysty", "Register", "Account")
-        <br />
-    </form>
 
-</div>
+@using (Html.BeginForm("AddSinger", "AdminController", FormMethod.Post))
+{ 
+
+    <p>Imię: @Html.TextBoxFor(a => a.singer.Name)</p>
+    <p>Nazwisko: @Html.TextBoxFor(a => a.singer.LastName)</p>
+    <p>
+        Aktywność:
+        @Html.DropDownListFor(a => a.singer.Activicity, new[]
+        {
+        new SelectListItem() {Text = "aktywny" },
+        new SelectListItem() {Text = "nieaktywny" }
+        }
+        )
+    </p>
+    <p>Data dołączenia: @Html.TextBoxFor(a => a.singer.JoiningDate)</p>
+
+    <input type="submit" value="Dodaj"/>
+
+}
+
+@*<div>
+        <form onsubmit="if (this.name.value == ''||this.lastname.value == '')
+    { alert('Zanim wyślesz formularz wypełnij wszystkie pola!');
+    return false }
+    else if (this.name.value != '' ||this.lastname.value != ''){ alert('Pomyślnie dodano użytkownika');
+        return true } ">
+            <h5>Imię:</h5><input type="text" name="name" /><br />
+            <h5>Nazwisko:</h5><input type="text" name="lastname" /><br />
+            @*<input type="submit" value="OK" />
+            @Html.ActionLink("Stwórz konto dla chórzysty", "Register", "Account")
+            <br />
+        </form>
+
+    </div>*@
+
 <div>
     <br />
     @Html.ActionLink("Dodaj nuty chórzysty", "SingersSheetMusicListAcctualization")

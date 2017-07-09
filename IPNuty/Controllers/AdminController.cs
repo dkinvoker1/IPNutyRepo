@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using IPNuty.ViewModels.Admin;
 using IPNuty.Models;
+using IPNuty.Models.Managers.Admin;
 
 namespace IPNuty.Controllers
 {
@@ -38,6 +39,22 @@ namespace IPNuty.Controllers
         // GET: /Admin/
         public ActionResult SingerListAcctualization()
         {
+            var singersListAcctualization = new SingersListAcctualizationViewModel();
+            return View(singersListAcctualization.allSingersList);
+        }
+
+        [HttpPost]
+        public ActionResult AddSinger(SingersListAcctualizationViewModel model)
+        {
+            SingersManager singersManager = new SingersManager();
+
+            Singer singer = new Singer.Builder(model.singer.Name, model.singer.LastName)
+                .SetActivicity(model.singer.Activicity)
+                .SetJoiningDate(model.singer.JoiningDate)
+                .build();
+
+            singersManager.CreateNewSinger(singer);
+
             var singersListAcctualization = new SingersListAcctualizationViewModel();
             return View(singersListAcctualization.allSingersList);
         }

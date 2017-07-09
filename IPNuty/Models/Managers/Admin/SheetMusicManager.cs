@@ -15,33 +15,39 @@ namespace IPNuty.Models.Managers.Admin
         {
             using (var db = new ApplicationDbContext())
             {
-                var nuta1 = new SheetMusic("Earth Song", "Frank Tichieli", 5);
-                var nuta2 = new SheetMusic("Lux Aurumque", "Eric Whitacre", 2);
-
-                var muzyk = new Singer.Builder("Magda", "Magdzińska").build();
-
-                //db.Singers.Add(muzyk);
-                db.SheetsOfMusic.Add(nuta1);
+                db.SheetsOfMusic.Add(sheetMusic);
                 db.SaveChanges();
-                //allSheetMusicList=db.SheetsOfMusic.Select
             }
-            
+
         }
 
         public void RemoveSheetMusic(SheetMusic sheetMusic)
         {
-            //do napisania
-            //allSheetMusicList.Remove(sheetMusic);
+            using (var db = new ApplicationDbContext())
+            {
+                db.SheetsOfMusic.Remove(sheetMusic);
+                db.SaveChanges();
+            }
         }
 
         public void SheetMusicTitleUpdate(SheetMusic sheetMusic, string title)
         {
-            sheetMusic.Title = title;
+            using (var db = new ApplicationDbContext())
+            {
+                var result = db.SheetsOfMusic.SingleOrDefault(s => s.Title == sheetMusic.Title & s.Author == sheetMusic.Author);
+                result.Title = title;
+                db.SaveChanges();
+            }
         }
 
         public void SheetMusicAuthorUpdate(SheetMusic sheetMusic, string author)
         {
-            sheetMusic.Author = author;
+            using (var db = new ApplicationDbContext())
+            {
+                var result = db.SheetsOfMusic.SingleOrDefault(s => s.Title == sheetMusic.Title & s.Author == sheetMusic.Author);
+                result.Author = author;
+                db.SaveChanges();
+            }
         }
     }
 }

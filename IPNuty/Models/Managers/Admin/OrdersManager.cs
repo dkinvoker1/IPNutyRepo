@@ -8,11 +8,25 @@ namespace IPNuty.Models.Managers.Admin
 {
     public class OrdersManager
     {
-        public List<Order> allOrdersList = OrdersCollection.GetAllOrders();
 
-        public void CompleteOrder(Order order)
+        public void AddOrder(Order order)
         {
-            order.completed = true;
+            using (var db = new ApplicationDbContext())
+            {
+                db.Orders.Add(order);
+                db.SaveChanges();
+            }
+
         }
+
+        public void RemoveOrder(Order order)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                db.Orders.Remove(order);
+                db.SaveChanges();
+            }
+        }
+
     }
 }
