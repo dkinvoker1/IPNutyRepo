@@ -19,6 +19,17 @@ namespace IPNuty.Models.Managers.Admin
             }
         }
 
+        public Singer GetSingerById(int id)
+        {
+            Singer singer;
+            using (var db = new ApplicationDbContext())
+            {
+                var result = db.Singers.SingleOrDefault(s => s.SingerId == s.SingerId);
+                singer = result;
+            }
+            return singer;
+        }
+
         public void RemoveSinger(Singer singer)
         {
             using (var db = new ApplicationDbContext())
@@ -48,12 +59,21 @@ namespace IPNuty.Models.Managers.Admin
             }
         }
 
-        public void SingerActivicityUpdate(Singer singer, bool activicity)
+        public void SingerActivicityUpdate(Singer singer)
         {
             using (var db = new ApplicationDbContext())
             {
                 var result = db.Singers.SingleOrDefault(s => s.Name == singer.Name & s.LastName == singer.LastName);
-                result.Activicity = activicity;
+
+                bool activicity = result.Activicity;
+                if (activicity == true)
+                {
+                    result.Activicity = false;
+                }
+                else
+                {
+                    result.Activicity = true;
+                }
                 db.SaveChanges();
             }
         }

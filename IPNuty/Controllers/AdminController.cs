@@ -43,7 +43,7 @@ namespace IPNuty.Controllers
             return View(singersListAcctualization.allSingersList);
         }
 
-        [HttpPost]
+        [Route("AdminController/AddSinger")]
         public ActionResult AddSinger(SingersListAcctualizationViewModel model)
         {
             SingersManager singersManager = new SingersManager();
@@ -59,6 +59,16 @@ namespace IPNuty.Controllers
             return View(singersListAcctualization.allSingersList);
         }
 
+        public ActionResult ChangeSingerActivicity(int singerId)
+        {
+            SingersManager singersManager = new SingersManager();
+            Singer singer = singersManager.GetSingerById(singerId);
+
+            singersManager.SingerActivicityUpdate(singer);
+
+            var singersListAcctualization = new SingersListAcctualizationViewModel();
+            return View(singersListAcctualization.allSingersList);
+        }
         //
         // GET: /Admin/
         public ActionResult SingersSheetMusicListAcctualization()

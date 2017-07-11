@@ -5,7 +5,7 @@
 
 <h2>Dodaj nowego chórzystę do bazy</h2>
 
-@using (Html.BeginForm("AddSinger", "AdminController", FormMethod.Post))
+@using (Html.BeginForm("AddSinger", "AdminController"))
 { 
 
     <p>Imię: @Html.TextBoxFor(a => a.singer.Name)</p>
