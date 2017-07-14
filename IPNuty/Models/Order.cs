@@ -13,6 +13,10 @@ namespace IPNuty.Models
         public DateTime orderTime;
         public bool completed;
 
+        public Order()
+        {
+        }
+
         public Order(Builder builder)
         {
             this.singer = builder.singer;

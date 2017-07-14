@@ -178,6 +178,18 @@
     <Compile Include="Migrations\201706240253043_Singerzy.Designer.cs">
       <DependentUpon>201706240253043_Singerzy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707141453284_Dodane_imie_do_rejestracji.cs" />
+    <Compile Include="Migrations\201707141453284_Dodane_imie_do_rejestracji.Designer.cs">
+      <DependentUpon>201707141453284_Dodane_imie_do_rejestracji.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707141543080_Dodane_id_usuniete_imie_rejestracja.cs" />
+    <Compile Include="Migrations\201707141543080_Dodane_id_usuniete_imie_rejestracja.Designer.cs">
+      <DependentUpon>201707141543080_Dodane_id_usuniete_imie_rejestracja.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707141626503_Zmiana_Id_singera_w_rejestracji.cs" />
+    <Compile Include="Migrations\201707141626503_Zmiana_Id_singera_w_rejestracji.Designer.cs">
+      <DependentUpon>201707141626503_Zmiana_Id_singera_w_rejestracji.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\LoginAndRegister\AccountViewModels.cs" />
     <Compile Include="Models\Collections\OrdersCollection.cs" />
@@ -243,6 +255,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706240253043_Singerzy.resx">
       <DependentUpon>201706240253043_Singerzy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707141453284_Dodane_imie_do_rejestracji.resx">
+      <DependentUpon>201707141453284_Dodane_imie_do_rejestracji.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707141543080_Dodane_id_usuniete_imie_rejestracja.resx">
+      <DependentUpon>201707141543080_Dodane_id_usuniete_imie_rejestracja.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707141626503_Zmiana_Id_singera_w_rejestracji.resx">
+      <DependentUpon>201707141626503_Zmiana_Id_singera_w_rejestracji.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

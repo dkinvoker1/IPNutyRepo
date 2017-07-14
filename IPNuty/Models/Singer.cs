@@ -23,6 +23,7 @@ namespace IPNuty.Models
             this.Name = builder.Name;
             this.LastName = builder.LastName;
             this.JoiningDate = builder.JoiningDate;
+            this.Activicity = builder.Activicity;
         }
 
         public class Builder

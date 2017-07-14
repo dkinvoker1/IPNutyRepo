@@ -11,6 +11,7 @@ namespace IPNuty.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public Singer SingerId { get; set; }
         //You can extend this class by adding additional fields like Birthday
     }
 

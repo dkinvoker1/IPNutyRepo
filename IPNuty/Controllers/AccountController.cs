@@ -1,4 +1,5 @@
 ﻿using IPNuty.Models;
+using IPNuty.Models.Managers.Admin;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -102,11 +103,15 @@ namespace IPNuty.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                Singer singer = new Singer.Builder(model.Name,model.Surename).SetActivicity(model.Activity).build();
+                
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email ,SingerId=singer};
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
+                    //SingersManager singerManager = new SingersManager();
+                    //singerManager.CreateNewSinger(singer);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     return RedirectToAction("Index", "Home");
                 }

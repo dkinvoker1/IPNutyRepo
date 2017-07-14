@@ -25,6 +25,20 @@ namespace IPNuty.Models
 
     public class RegisterViewModel
     {
+
+        [Required]
+        [Display(Name = "Imię")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Nazwisko")]
+        public string Surename { get; set; }
+
+
+        [Required]
+        [Display(Name = "Aktywność")]
+        public bool Activity { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

@@ -14,8 +14,8 @@
         Aktywność:
         @Html.DropDownListFor(a => a.singer.Activicity, new[]
         {
-        new SelectListItem() {Text = "aktywny" },
-        new SelectListItem() {Text = "nieaktywny" }
+        new SelectListItem() {Text = "aktywny" ,Value="true"},
+        new SelectListItem() {Text = "nieaktywny" ,Value="false"}
         }
         )
     </p>
