@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using IPNuty.ViewModels.Admin;
 using IPNuty.Models;
 using IPNuty.Models.Managers.Admin;
+using System.Threading.Tasks;
 
 namespace IPNuty.Controllers
 {
@@ -77,6 +78,29 @@ namespace IPNuty.Controllers
             return View(singersSheetMusicListAcctualization);
         }
 
+        //GET
+        [AllowAnonymous]
+        public ActionResult AddNewSheetMusic()
+        {
+            var addNewSheetMusic = new AddNewSheetMusicModel();
+            return View(addNewSheetMusic);
+        }
+        // POST: /Admin/AddSheetMusic
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> AddNewSheetMusic(AddNewSheetMusicModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                SheetMusic sheet = new SheetMusic(model.title, model.author, model.type);
+                SheetMusicManager sheetManager = new SheetMusicManager();
+                sheetManager.AddSheetMusic(sheet);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+
         //public ActionResult SingersSheetMusicListAcctualization(Singer singer)
         //{
         //    var singersSheetMusicListAcctualization = new SingersSheetMusicListAcctualizationViewModel();
@@ -90,10 +114,5 @@ namespace IPNuty.Controllers
             return View(addNewSinger);
         }
 
-        public ActionResult AddNewSheetMusic()
-        {
-            var addNewSheetMusic = new AddNewSheetMusicModel();
-            return View(addNewSheetMusic);
-        }
     }
 }

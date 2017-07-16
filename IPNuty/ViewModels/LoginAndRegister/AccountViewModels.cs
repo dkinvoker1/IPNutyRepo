@@ -9,10 +9,14 @@ namespace IPNuty.Models
 {
     public class LoginViewModel
     {
+        //[Required]
+        //[Display(Name = "Email")]
+        //[EmailAddress]
+        //public string Email { get; set; }
+
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Nazwa użytkownika")]
+        public string Login { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -39,10 +43,10 @@ namespace IPNuty.Models
         [Display(Name = "Aktywność")]
         public bool Activity { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        //[Required]
+        //[EmailAddress]
+        //[Display(Name = "Email")]
+        //public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = " {0} musi mieć przynajmniej {2} znaków.", MinimumLength = 6)]

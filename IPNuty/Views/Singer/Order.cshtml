@@ -1,8 +1,39 @@
-﻿@model IPNuty.ViewModels.Singers.OrderViewModel
+﻿@model IEnumerable<IPNuty.Models.Order>
 @{
-    ViewBag.Title = "Order";
+    ViewBag.Title = "Zamów nuty";
 }
 
-<h2>Order</h2>
+<h2>Twoje zamówienia na kolejną próbę</h2>
 
+@Html.ActionLink("Dodaj nowe zamówienie", "SheetMusicList")
 
+<div>
+    <table>
+        <tr>
+            <td>Data złożenia zamówienia</td>
+            <td>Zamówiono</td>
+            <td>Realizacja</td>
+            <td>Anuluj</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            if (item.singer.SingerId == 0) //wyświetlamy zamówienia tylko tego użytkownika- DO ZMIANY
+            {
+                foreach (var sheet in item.orderedSheetMusicList) //wyswietlamy kazde zamowienie
+                {
+                    <tr>
+                        <td>@item.orderTime.ToShortDateString()</td>
+                        <td>@sheet.Title @sheet.Author</td>
+                        <td>@item.completed</td>
+                        <td>Usuń zamówienie</td>
+                    </tr>
+                }
+
+            }
+        }
+        {
+
+        }
+        <tr></tr>
+    </table>
+</div>

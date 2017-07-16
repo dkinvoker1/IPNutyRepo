@@ -1,7 +1,29 @@
-﻿@model IPNuty.ViewModels.Singers.SheetMusicListAcctualizationViewModel
+﻿@*@model IPNuty.ViewModels.Singers.SheetMusicListAcctualizationViewModel*@
+@model    IEnumerable<IPNuty.Models.SheetMusic>
 @{
-    ViewBag.Title = "SheetMusicList";
+    ViewBag.Title = "Baza nut chóru";
 }
-
-<h2>SheetMusicList</h2>
+<h2>Twoje posiadane nuty</h2>
+<div>
+    <table>
+        <tr>
+            <td>Autor</td>
+            <td>Tytuł</td>
+            <td>Rodzaj</td>
+            <td>Czy posiadane</td>
+            <td>Akcja</td>
+        </tr>
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Author</td>
+                <td>@item.Title</td>
+                <td>@item.Type</td>
+                <td>Tak/Nie</td>
+                <td><button>Usuń nuty/Zamów nuty</button></td>
+            </tr>
+        }
+    </table>
+    <h2>Jeśli nuty są posiadane to można je usunąć z listy, jeśli są nie w posiadaniu to można je zamówić - wtedy trafiają na listę zamówień</h2>
+</div>
 

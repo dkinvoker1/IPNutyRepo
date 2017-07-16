@@ -1,24 +1,43 @@
 ﻿@model IPNuty.ViewModels.Admin.AddNewSheetMusicModel
-
 @{
     ViewBag.Title = "Dodaj nowe nuty do zbioru chóru";
 }
 
 <h2>Dodaj nowe nuty do zbioru chóru</h2>
+@* gdzie coś dopisywałam: AdminController -> AddSheetMusic, ViewModel -> AddNewSheetMusicModel*@
 
-<div>
-    <form onsubmit="if (this.title.value == '' || this.author.value == '' || this.type.value == '')
-{ alert('Zanim wyślesz formularz wypełnij wszystkie pola!');
-return false }
-else if (this.title.value != '' || this.author.value != '' || this.type.value != '') {
-    alert('Pomyślnie dodano nuty do bazy');
-    return true } ">
-        <h5>Tytuł:</h5><input type="text" name="title" /><br />
-        <h5>Autor:</h5><input type="text" name="author" /><br />
-        <h5>Typ:</h5><input type="text" name="type" /><br />
-        <input type="submit" value="OK" /><br />
-    </form>
-</div>
+@using (Html.BeginForm("AddNewSheetMusic", "Admin")) //pewnie tutaj jest źle, wygląda dobrze ale nie ma funkcjonalności
+{
+
+    <p>Tytuł: @Html.TextBoxFor(a => a.title)</p>
+    <p>Autor: @Html.TextBoxFor(a => a.author)</p>
+    <p>
+        Typ:
+        @Html.DropDownListFor(a => a.type, new[]
+        {
+        new SelectListItem() {Text = "rozrywkowe" , Value="1"},
+        new SelectListItem() {Text = "sakralne" , Value="2"},
+        new SelectListItem() {Text = "musicalowe" ,Value="3"},
+        new SelectListItem() {Text = "ludowe" , Value="4"},
+        new SelectListItem() {Text = "inne" ,Value="5"},
+        }
+        )
+    </p>
+    <input type="submit" value="Dodaj" />
+}
+@*<div>
+        <form onsubmit="if (this.title.value == '' || this.author.value == '' || this.type.value == '')
+    { alert('Zanim wyślesz formularz wypełnij wszystkie pola!');
+    return false }
+    else if (this.title.value != '' || this.author.value != '' || this.type.value != '') {
+        alert('Pomyślnie dodano nuty do bazy');
+        return true } ">
+            <h5>Tytuł:</h5><input type="text" name="title" /><br />
+            <h5>Autor:</h5><input type="text" name="author" /><br />
+            <h5>Typ:</h5><input type="text" name="type" /><br />
+            <input type="submit" value="OK" /><br />
+        </form>
+    </div>*@
 
 <div>
     @Html.ActionLink("Wróc do listy nut", "SheetMusicListAcctualization")

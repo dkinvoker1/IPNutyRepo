@@ -72,7 +72,7 @@ namespace IPNuty.Controllers
             }
 
 
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, shouldLockout: false);
 
             switch (result)
             {
@@ -105,7 +105,7 @@ namespace IPNuty.Controllers
             {
                 Singer singer = new Singer.Builder(model.Name,model.Surename).SetActivicity(model.Activity).build();
                 
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email ,SingerId=singer};
+                var user = new ApplicationUser { UserName = model.Name+model.Surename ,SingerId=singer};
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
