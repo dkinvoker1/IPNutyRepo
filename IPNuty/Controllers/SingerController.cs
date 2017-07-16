@@ -21,7 +21,7 @@ namespace IPNuty.Controllers
         public ActionResult Order()
         {
             var orderViewModel = new OrderViewModel();
-            return View(orderViewModel.allSheetMusicList);
+            return View(orderViewModel.order);
         }
 
         //
