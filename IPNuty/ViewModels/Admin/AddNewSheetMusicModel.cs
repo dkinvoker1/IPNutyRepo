@@ -11,7 +11,6 @@ namespace IPNuty.ViewModels.Admin
 {
     public class AddNewSheetMusicModel
     {
-        public SheetMusic sheetMusic;
 
         [Required]
         [Display(Name = "Tytuł")]

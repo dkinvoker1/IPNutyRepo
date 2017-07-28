@@ -11,8 +11,8 @@ namespace IPNuty.Models.Collections
         {
             using (ApplicationDbContext dbcontext = new ApplicationDbContext())
             {
-                List<Singer> AllSheetMusic = dbcontext.Singers.ToList();
-                return AllSheetMusic;
+                List<Singer> AllSingers = dbcontext.Singers.ToList();
+                return AllSingers;
             }
 
         }

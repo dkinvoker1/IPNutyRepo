@@ -12,13 +12,11 @@ using System.Web.Mvc;
 
 namespace IPNuty.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-
         
         public ApplicationSignInManager SignInManager
         {
