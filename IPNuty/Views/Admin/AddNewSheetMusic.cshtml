@@ -6,7 +6,7 @@
 <h2>Dodaj nowe nuty do zbioru chóru</h2>
 @* gdzie coś dopisywałam: AdminController -> AddSheetMusic, ViewModel -> AddNewSheetMusicModel*@
 
-@using (Html.BeginForm("AddNewSheetMusic", "Admin")) //pewnie tutaj jest źle, wygląda dobrze ale nie ma funkcjonalności
+@using (Html.BeginForm("AddNewSheetMusic", "Admin"))
 {
 
     <p>Tytuł: @Html.TextBoxFor(a => a.title)</p>
@@ -23,24 +23,11 @@
         }
         )
     </p>
+    
     <input type="submit" value="Dodaj" />
+    <p>@ViewBag.result</p>
 }
-@*<div>
-        <form onsubmit="if (this.title.value == '' || this.author.value == '' || this.type.value == '')
-    { alert('Zanim wyślesz formularz wypełnij wszystkie pola!');
-    return false }
-    else if (this.title.value != '' || this.author.value != '' || this.type.value != '') {
-        alert('Pomyślnie dodano nuty do bazy');
-        return true } ">
-            <h5>Tytuł:</h5><input type="text" name="title" /><br />
-            <h5>Autor:</h5><input type="text" name="author" /><br />
-            <h5>Typ:</h5><input type="text" name="type" /><br />
-            <input type="submit" value="OK" /><br />
-        </form>
-    </div>*@
 
 <div>
     @Html.ActionLink("Wróc do listy nut", "SheetMusicListAcctualization")
-    @*<input type="button" value="Wróc do listy nut" onclick="location.href='@Url.Action("SheetMusicListAcctualization")'" />*@
-    @*Najpierw podajemy widok, potem ew. folder*@
 </div>

@@ -12,13 +12,11 @@ using System.Web.Mvc;
 
 namespace IPNuty.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
-
         
         public ApplicationSignInManager SignInManager
         {
@@ -105,15 +103,17 @@ namespace IPNuty.Controllers
             {
                 Singer singer = new Singer.Builder(model.Name,model.Surename).SetActivicity(model.Activity).build();
                 
-                var user = new ApplicationUser { UserName = model.Name+model.Surename ,SingerId=singer};
+                var user = new ApplicationUser {UserName = model.Name+model.Surename ,SingerId=singer};
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    //SingersManager singerManager = new SingersManager();
-                    //singerManager.CreateNewSinger(singer);
+                    //to powinno nadać rolę
+                    var currentUser = UserManager.FindByName(user.UserName);
+                    var roleresult = UserManager.AddToRole(currentUser.Id, "Singer");
+
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Register", "Account");
                 }
                 AddErrors(result);
             }

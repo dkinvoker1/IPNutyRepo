@@ -44,21 +44,7 @@ namespace IPNuty.Controllers
             return View(singersListAcctualization.allSingersList);
         }
 
-        [Route("AdminController/AddSinger")]
-        public ActionResult AddSinger(SingersListAcctualizationViewModel model)
-        {
-            SingersManager singersManager = new SingersManager();
 
-            Singer singer = new Singer.Builder(model.singer.Name, model.singer.LastName)
-                .SetActivicity(model.singer.Activicity)
-                .SetJoiningDate(model.singer.JoiningDate)
-                .build();
-
-            singersManager.CreateNewSinger(singer);
-
-            var singersListAcctualization = new SingersListAcctualizationViewModel();
-            return View(singersListAcctualization.allSingersList);
-        }
 
         public ActionResult ChangeSingerActivicity(int singerId)
         {
@@ -78,6 +64,37 @@ namespace IPNuty.Controllers
             return View(singersSheetMusicListAcctualization);
         }
 
+        #region Singers
+        //GET
+        [AllowAnonymous]
+        public ActionResult AddNewSinger()
+        {
+            var addNewSinger = new AddNewSingerViewModel();
+            return View(addNewSinger);
+        }
+        // POST: /Admin/AddNewSinger
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> AddNewSinger(AddNewSingerViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Singer singer = new Singer.Builder(model.name, model.lastName)
+                .SetActivicity(model.activicity)
+                .SetJoiningDate(model.joiningDate)
+                .build();
+
+                SingersManager sheetManager = new SingersManager();
+                sheetManager.CreateNewSinger(singer);
+                ViewBag.result = "Dodano chórzystę do bazy!";
+                return RedirectToAction("", "");
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+        #endregion
+
+        #region SheetMusic
         //GET
         [AllowAnonymous]
         public ActionResult AddNewSheetMusic()
@@ -95,24 +112,12 @@ namespace IPNuty.Controllers
                 SheetMusic sheet = new SheetMusic(model.title, model.author, model.type);
                 SheetMusicManager sheetManager = new SheetMusicManager();
                 sheetManager.AddSheetMusic(sheet);
+                ViewBag.result = "Dodano nuty do bazy!";
+                return RedirectToAction("", "");
             }
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-
-        //public ActionResult SingersSheetMusicListAcctualization(Singer singer)
-        //{
-        //    var singersSheetMusicListAcctualization = new SingersSheetMusicListAcctualizationViewModel();
-        //    singersSheetMusicListAcctualization.singer = singer;
-        //    return View(singersSheetMusicListAcctualization);
-        //}
-
-        public ActionResult AddNewSinger()
-        {
-            var addNewSinger = new AddNewSingerViewModel();
-            return View(addNewSinger);
-        }
-
+        #endregion
     }
 }

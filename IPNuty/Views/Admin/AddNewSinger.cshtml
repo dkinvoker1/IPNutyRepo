@@ -5,45 +5,34 @@
 
 <h2>Dodaj nowego chórzystę do bazy</h2>
 
-@using (Html.BeginForm("AddSinger", "AdminController"))
+@using (Html.BeginForm("AddNewSinger", "Admin"))
 { 
 
-    <p>Imię: @Html.TextBoxFor(a => a.singer.Name)</p>
-    <p>Nazwisko: @Html.TextBoxFor(a => a.singer.LastName)</p>
+    <p>Imię: @Html.TextBoxFor(a => a.name)</p>
+    <p>Nazwisko: @Html.TextBoxFor(a => a.lastName)</p>
     <p>
         Aktywność:
-        @Html.DropDownListFor(a => a.singer.Activicity, new[]
+        @Html.DropDownListFor(a => a.activicity, new[]
         {
-        new SelectListItem() {Text = "aktywny" ,Value="true"},
-        new SelectListItem() {Text = "nieaktywny" ,Value="false"}
+        new SelectListItem() {Text = "aktywny", Value="true"},
+        new SelectListItem() {Text = "nieaktywny", Value="false"}
         }
         )
     </p>
-    <p>Data dołączenia: @Html.TextBoxFor(a => a.singer.JoiningDate)</p>
+    <p>Data dołączenia: @Html.TextBoxFor(a => a.joiningDate)</p>
 
     <input type="submit" value="Dodaj"/>
-
+    <p>@ViewBag.result</p>
 }
-
-@*<div>
-        <form onsubmit="if (this.name.value == ''||this.lastname.value == '')
-    { alert('Zanim wyślesz formularz wypełnij wszystkie pola!');
-    return false }
-    else if (this.name.value != '' ||this.lastname.value != ''){ alert('Pomyślnie dodano użytkownika');
-        return true } ">
-            <h5>Imię:</h5><input type="text" name="name" /><br />
-            <h5>Nazwisko:</h5><input type="text" name="lastname" /><br />
-            @*<input type="submit" value="OK" />
-            @Html.ActionLink("Stwórz konto dla chórzysty", "Register", "Account")
-            <br />
-        </form>
-
-    </div>*@
 
 <div>
     <br />
     @Html.ActionLink("Dodaj nuty chórzysty", "SingersSheetMusicListAcctualization")
-    @*<input type="button" value="Dodaj nuty chórzysty" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization")'" />*@
+   
+</div>
+
+<div>
+    @Html.ActionLink("Wróc do listy chórzystów", "SingerListAcctualization")
 </div>
 
 

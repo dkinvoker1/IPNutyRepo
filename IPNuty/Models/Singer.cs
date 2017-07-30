@@ -16,6 +16,7 @@ namespace IPNuty.Models
 
         public Singer()
         {
+
         }
 
         private Singer(Builder builder)
