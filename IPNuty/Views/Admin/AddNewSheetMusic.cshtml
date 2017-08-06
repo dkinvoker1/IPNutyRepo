@@ -9,10 +9,10 @@
 @using (Html.BeginForm("AddNewSheetMusic", "Admin"))
 {
 
-    <p>Tytuł: @Html.TextBoxFor(a => a.title)</p>
-    <p>Autor: @Html.TextBoxFor(a => a.author)</p>
+    <p>Tytuł: <br />@Html.TextBoxFor(a => a.title)</p>
+    <p>Autor: <br />@Html.TextBoxFor(a => a.author)</p>
     <p>
-        Typ:
+        Typ:<br />
         @Html.DropDownListFor(a => a.type, new[]
         {
         new SelectListItem() {Text = "rozrywkowe" , Value="1"},

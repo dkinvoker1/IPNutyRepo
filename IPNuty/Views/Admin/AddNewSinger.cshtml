@@ -8,10 +8,10 @@
 @using (Html.BeginForm("AddNewSinger", "Admin"))
 { 
 
-    <p>Imię: @Html.TextBoxFor(a => a.name)</p>
-    <p>Nazwisko: @Html.TextBoxFor(a => a.lastName)</p>
+    <p>Imię: <br />@Html.TextBoxFor(a => a.name)</p>
+    <p>Nazwisko: <br />@Html.TextBoxFor(a => a.lastName)</p>
     <p>
-        Aktywność:
+        Aktywność:<br />
         @Html.DropDownListFor(a => a.activicity, new[]
         {
         new SelectListItem() {Text = "aktywny", Value="true"},
@@ -19,7 +19,7 @@
         }
         )
     </p>
-    <p>Data dołączenia: @Html.TextBoxFor(a => a.joiningDate)</p>
+    <p>Data dołączenia: <br />@Html.TextBoxFor(a => a.joiningDate)</p>
 
     <input type="submit" value="Dodaj"/>
     <p>@ViewBag.result</p>

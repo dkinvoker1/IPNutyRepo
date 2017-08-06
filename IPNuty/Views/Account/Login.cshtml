@@ -12,7 +12,7 @@
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Zaloguj się przy pomocy przydzielonego hasła i swojego maila.</h4>
+                <h4>Zaloguj się przy pomocy przydzielonego loginu i hasła.</h4>
                 <br />
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
