@@ -16,10 +16,12 @@
                 <br />
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
                 <div class="form-group">
                     @Html.LabelFor(m => m.Login, new { @class = "col-md-2 control-label" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Login, new { @class = "form-control" })
+                        @* komunikat o braku pól - trzeba zmienić jeśli naprawdę po wylogowaniu daje złe komunikaty *@
                         @Html.ValidationMessageFor(m => m.Login, "", new { @class = "text-danger" })
                     </div>
                 </div>
