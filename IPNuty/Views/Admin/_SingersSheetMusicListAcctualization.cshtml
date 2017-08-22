@@ -1,28 +1,30 @@
-﻿@Model IEnumerable<IPNuty.Models.SheetMusic>
+﻿            @*TO NIE DZIAŁA, NIE UŻYWAMY TEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
 
-                      <div>@ViewBag.id</div>
+@Model IEnumerable<IPNuty.Models.SheetMusic>
 
-<table>
-    <tr>
-        <td>Autor</td>
-        <td>Tytuł</td>
-        <td>Rodzaj</td>
-        <td>Czy posiadane</td>
-        <td>Dodaj/usuń</td>
-    </tr
-    
+        <div>@ViewBag.id</div>
 
-    @foreach (var item in Model.allSheetMusicList) //dla wszystkich dostępnych nut w bazie
-    {
-        <tr>
-            <td>@item.Author</td>
-            <td>@item.Title</td>
-            <td>...</td>
-            @* Sprawdzenie, czy osoba posiada te nuty *@
-            <td>tak/nie</td>
-            @* if posiada - usuń, if nie posiada - dodaj *@
-            <td><button>Usuń nuty</button></td>
-        </tr>
-    }
+        <table>
+            <tr>
+                <td>Autor</td>
+                <td>Tytuł</td>
+                <td>Rodzaj</td>
+                <td>Czy posiadane</td>
+                <td>Dodaj/usuń</td>
+            </tr>
+
+            @*TO NIE DZIAŁA, NIE UŻYWAMY TEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
+
+            <tr>
+                <td>@item.Author</td>
+                <td>@item.Title</td>
+                <td>...</td>
+                @* Sprawdzenie, czy osoba posiada te nuty *@
+                <td>tak/nie</td>
+                @* if posiada - usuń, if nie posiada - dodaj *@
+                <td><button>Usuń nuty</button></td>
+            </tr>
+
 </table>
+            @*TO NIE DZIAŁA, NIE UŻYWAMY TEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
 

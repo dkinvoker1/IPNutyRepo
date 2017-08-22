@@ -64,34 +64,37 @@ namespace IPNuty.Controllers
             return View(singersSheetMusicListAcctualization);
         }
 
-        #region Singers
-        //GET
-        [AllowAnonymous]
-        public ActionResult AddNewSinger()
-        {
-            var addNewSinger = new AddNewSingerViewModel();
-            return View(addNewSinger);
-        }
-        // POST: /Admin/AddNewSinger
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ActionResult> AddNewSinger(AddNewSingerViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                Singer singer = new Singer.Builder(model.name, model.lastName)
-                .SetActivicity(model.activicity)
-                .SetJoiningDate(model.joiningDate)
-                .build();
+        #region Singers - to jest w AccountControllerze
 
-                SingersManager sheetManager = new SingersManager();
-                sheetManager.CreateNewSinger(singer);
-                ViewBag.result = "Dodano chórzystę do bazy!";
-                return RedirectToAction("", "");
-            }
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
+        //GET
+        //[AllowAnonymous]
+        //public ActionResult AddNewSinger()
+        //{
+        //    var addNewSinger = new AddNewSingerViewModel();
+        //    return View(addNewSinger);
+        //}
+        // POST: /Admin/AddNewSinger
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<ActionResult> AddNewSinger(AddNewSingerViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Singer singer = new Singer.Builder(model.name, model.lastName)
+        //        .SetActivicity(model.activicity)
+        //        .SetJoiningDate(model.joiningDate)
+        //        .build();
+
+        //        SingersManager sheetManager = new SingersManager();
+        //        sheetManager.CreateNewSinger(singer);
+        //        ViewBag.Message = "Dodano chórzystę do bazy!";
+        //        ModelState.Clear();
+        //        return View();
+        //        //return RedirectToAction("", "");
+        //    }
+        //    // If we got this far, something failed, redisplay form
+        //    return View(model);
+        //}
         #endregion
 
         #region SheetMusic
@@ -112,8 +115,10 @@ namespace IPNuty.Controllers
                 SheetMusic sheet = new SheetMusic(model.title, model.author, model.type);
                 SheetMusicManager sheetManager = new SheetMusicManager();
                 sheetManager.AddSheetMusic(sheet);
-                ViewBag.result = "Dodano nuty do bazy!";
-                return RedirectToAction("", "");
+                ViewBag.Message = "Dodano nuty do bazy!";
+                ModelState.Clear();
+                return View();
+                //return RedirectToAction("AddNewSheetMusic", "Admin");
             }
             // If we got this far, something failed, redisplay form
             return View(model);

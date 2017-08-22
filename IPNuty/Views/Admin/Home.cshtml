@@ -1,10 +1,15 @@
-﻿
-@{
+﻿@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+
     ViewBag.Title = "Home";
-}
 
 <h2>Witaj!</h2>
 <div>
     <p>po zalogowaniu przekeiruje na home, po wylogowaniu na stronę logowania</p>
     <p>wymaga odpowiedniego połaczenia metod z przyciskami, by wykonywały coś mądrego</p>
 </div>
+}
+else
+{
+    < h2 > @Html.ActionLink("Zaloguj się, aby mieć dostęp do tej strony.", "Login", "Account") </ h2 >
+}

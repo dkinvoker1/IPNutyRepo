@@ -1,33 +1,42 @@
-﻿@model IPNuty.ViewModels.Admin.AddNewSheetMusicModel
-@{
-    ViewBag.Title = "Dodaj nowe nuty do zbioru chóru";
-}
+﻿@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
 
-<h2>Dodaj nowe nuty do zbioru chóru</h2>
-@* gdzie coś dopisywałam: AdminController -> AddSheetMusic, ViewModel -> AddNewSheetMusicModel*@
+    @model IPNuty.ViewModels.Admin.AddNewSheetMusicModel
+    {
+        ViewBag.Title = "Dodaj nowe nuty do zbioru chóru";
+    }
 
-@using (Html.BeginForm("AddNewSheetMusic", "Admin"))
+    <h2>Dodaj nowe nuty do zbioru chóru</h2>
+        @* gdzie coś dopisywałam: AdminController -> AddSheetMusic, ViewModel -> AddNewSheetMusicModel*@
+
+using (Html.BeginForm("AddNewSheetMusic", "Admin"))
 {
 
     <p>Tytuł: <br />@Html.TextBoxFor(a => a.title)</p>
-    <p>Autor: <br />@Html.TextBoxFor(a => a.author)</p>
-    <p>
-        Typ:<br />
-        @Html.DropDownListFor(a => a.type, new[]
-        {
+            <p>Autor: <br />@Html.TextBoxFor(a => a.author)</p>
+            <p>
+                Typ:<br />
+                @Html.DropDownListFor(a => a.type, new[]
+                 {
         new SelectListItem() {Text = "rozrywkowe" , Value="1"},
         new SelectListItem() {Text = "sakralne" , Value="2"},
         new SelectListItem() {Text = "musicalowe" ,Value="3"},
         new SelectListItem() {Text = "ludowe" , Value="4"},
         new SelectListItem() {Text = "inne" ,Value="5"},
         }
-        )
-    </p>
-    
-    <input type="submit" value="Dodaj" />
-    <p>@ViewBag.result</p>
+                 )
+            </p>
+
+            <input type="submit" value="Dodaj" />
+            <p>@ViewBag.Message</p>
 }
 
-<div>
-    @Html.ActionLink("Wróc do listy nut", "SheetMusicListAcctualization")
-</div>
+            <div>
+                @Html.ActionLink("Wróć do listy nut", "SheetMusicListAcctualization")
+            </div>
+}
+
+else
+{
+    <h2>@Html.ActionLink("Zaloguj się, aby mieć dostęp do tej strony.", "Login", "Account")</h2>
+}

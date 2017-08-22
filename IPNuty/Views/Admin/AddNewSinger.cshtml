@@ -1,4 +1,8 @@
-﻿@model IPNuty.ViewModels.Admin.AddNewSingerViewModel
+﻿
+@*TO NIE DZIAŁA, NIE UŻYWAMY TEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
+
+
+@model IPNuty.ViewModels.Admin.AddNewSingerViewModel
 @{
     ViewBag.Title = "Dodaj nowego chórzystę";
 }
@@ -6,7 +10,11 @@
 <h2>Dodaj nowego chórzystę do bazy</h2>
 
 @using (Html.BeginForm("AddNewSinger", "Admin"))
-{ 
+{
+
+
+    @*TO NIE DZIAŁA, NIE UŻYWAMY TEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
+
 
     <p>Imię: <br />@Html.TextBoxFor(a => a.name)</p>
     <p>Nazwisko: <br />@Html.TextBoxFor(a => a.lastName)</p>
@@ -22,14 +30,22 @@
     <p>Data dołączenia: <br />@Html.TextBoxFor(a => a.joiningDate)</p>
 
     <input type="submit" value="Dodaj"/>
-    <p>@ViewBag.result</p>
+    <p>@ViewBag.Message</p>
 }
+
+
+@*TO NIE DZIAŁA, NIE UŻYWAMY TEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
+
 
 <div>
     <br />
     @Html.ActionLink("Dodaj nuty chórzysty", "SingersSheetMusicListAcctualization")
    
 </div>
+
+
+@*TO NIE DZIAŁA, NIE UŻYWAMY TEGO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*@
+
 
 <div>
     @Html.ActionLink("Wróc do listy chórzystów", "SingerListAcctualization")

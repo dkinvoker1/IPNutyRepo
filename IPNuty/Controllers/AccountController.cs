@@ -78,7 +78,7 @@ namespace IPNuty.Controllers
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Nieudana próba logowania, spróbuj ponownie.");
                     return View(model);
             }
         }
@@ -112,8 +112,11 @@ namespace IPNuty.Controllers
                     var currentUser = UserManager.FindByName(user.UserName);
                     var roleresult = UserManager.AddToRole(currentUser.Id, "Singer");
 
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    return RedirectToAction("Register", "Account");
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    ViewBag.Message = "Dodano chórzystę do bazy!";
+                    ModelState.Clear();
+                    return View();
+                    //return RedirectToAction("Register", "Account");
                 }
                 AddErrors(result);
             }

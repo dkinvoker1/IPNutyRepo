@@ -1,52 +1,60 @@
-﻿@model IEnumerable<IPNuty.Models.Singer>
-@{
-    ViewBag.Title = "Lista członków chóru";
-}
+﻿@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
 
-<h2>Aktualizuj listę chórzystów</h2>
-<p> Odnośnik do jego listy posiadanych nut</p>
-<hr />
+    @model IEnumerable<IPNuty.Models.Singer>
+    {
+        ViewBag.Title = "Lista członków chóru";
+    }
 
-<div>
-    @Html.ActionLink("Dodaj nowego członka chóru", "Register","Account")
+    <h2>Aktualizuj listę chórzystów</h2>
+    <p> Odnośnik do jego listy posiadanych nut</p>
+    <hr />
 
-    @*<input type="button" value="Dodaj nowego członka" onclick="location.href='@Url.Action("AddNewSinger")'" />*@
-    @*Najpierw podajemy widok, potem ew. folder*@
-</div>
+    <div>
+        @Html.ActionLink("Dodaj nowego członka chóru", "Register", "Account")
 
-<div>
-    <table>
-        <tr>
-            <td>Imię</td>
-            <td>Nazwisko</td>
-            <td>Członek od:</td>
-            <td>Aktywność</td>
-            <td>Usuń</td>
-            <td>Posiadane nuty</td>
+        @*<input type="button" value="Dodaj nowego członka" onclick="location.href='@Url.Action("AddNewSinger")'" />*@
+        @*Najpierw podajemy widok, potem ew. folder*@
+    </div>
 
-        </tr>
-        @foreach (var item in Model)
-        {
+    <div>
+        <table>
             <tr>
-                <td>@item.Name</td>
-                <td>@item.LastName</td>
-                <td>@item.JoiningDate.ToShortDateString()</td>
-                @if (item.Activicity)
-                {
-                    <td><a href='@Url.Action("ChangeSingerActivicity", "AdminController", new { SingerId = item.SingerId})'>Aktywny<a/></td>
-                }
-                else
-                {
-                   <td><a href='@Url.Action("ChangeSingerActivicity", "AdminController" , new { SingerId =item.SingerId})'>Nieaktywny<a/></td>
-                }
-                <td><button>Usuń członka</button></td>
-                @*<td><input type="button" value="Przeglądaj" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization", "Admin", new { Name = item.Name, LastName = item.LastName, Activicity = item.Activicity, JoiningDate = item.JoiningDate, SingerSheetMusicList = item.SingerSheetMusicList })'" /></td>*@
-                <td><input type="button" value="Przeglądaj" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization")?@item'" /></td>
+                <td>Imię</td>
+                <td>Nazwisko</td>
+                <td>Członek od:</td>
+                <td>Aktywność</td>
+                <td>Usuń</td>
+                <td>Posiadane nuty</td>
 
             </tr>
-        }
-    </table>
-</div>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.LastName</td>
+                    <td>@item.JoiningDate.ToShortDateString()</td>
+                    @if (item.Activicity)
+                    {
+                        <td><a href='@Url.Action("ChangeSingerActivicity", "AdminController", new { SingerId = item.SingerId})'>Aktywny<a /></td>
+                    }
+                    else
+                    {
+                        <td><a href='@Url.Action("ChangeSingerActivicity", "AdminController" , new { SingerId =item.SingerId})'>Nieaktywny<a /></td>
+                    }
+                    <td><button>Usuń członka</button></td>
+                    @*<td><input type="button" value="Przeglądaj" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization", "Admin", new { Name = item.Name, LastName = item.LastName, Activicity = item.Activicity, JoiningDate = item.JoiningDate, SingerSheetMusicList = item.SingerSheetMusicList })'" /></td>*@
+                    <td><input type="button" value="Przeglądaj" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization")?@item'" /></td>
 
+                </tr>
+            }
+        </table>
+    </div>
 
+}
+
+else
+{
+    <h2>@Html.ActionLink("Zaloguj się, aby mieć dostęp do tej strony.", "Login", "Account")</h2>
+}
 

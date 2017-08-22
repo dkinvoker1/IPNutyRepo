@@ -1,19 +1,29 @@
-﻿@model IPNuty.ViewModels.Admin.SingersSheetMusicListAcctualizationViewModel
+﻿@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
 
-@{
-    ViewBag.Title = "Lista nut osoby XYZ";
-    ViewBag.Singer = this.Model;
+    @model IPNuty.ViewModels.Admin.SingersSheetMusicListAcctualizationViewModel
+
+
+    {
+        ViewBag.Title = "Lista nut osoby XYZ";
+        ViewBag.Singer = this.Model;
+    }
+
+    <h2>Lista nut osoby XYZ</h2>
+        <p>
+            Wyświetlamy całą bazę nut. Najpierw są wyświetlane nuty posiadane, później te nieposiadane. Istnieje możliwość dodawania nut do użytkownika i usuwania ich.<br />
+            Trzeba dostać się do danych tej jednej konkretnej osoby - jak to zrobić?
+        </p>
+
+        <div>
+
+            @Html.Partial("_SingersSheetMusicListAcctualization")
+
+        </div>
+
 }
 
-<h2>Lista nut osoby XYZ</h2>
-<p>
-    Wyświetlamy całą bazę nut. Najpierw są wyświetlane nuty posiadane, później te nieposiadane. Istnieje możliwość dodawania nut do użytkownika i usuwania ich.<br />
-    Trzeba dostać się do danych tej jednej konkretnej osoby - jak to zrobić?
-</p>
-
-<div>
-   
-    @Html.Partial("_SingersSheetMusicListAcctualization")
-
-</div>
-
+else
+{
+    <h2>@Html.ActionLink("Zaloguj się, aby mieć dostęp do tej strony.", "Login", "Account")</h2>
+}

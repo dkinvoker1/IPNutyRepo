@@ -1,5 +1,8 @@
-﻿@model IEnumerable<IPNuty.Models.SheetMusic>
-@{
+﻿@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+
+@model IEnumerable<IPNuty.Models.SheetMusic>
+{
     ViewBag.Title = "Baza nut chóru";
 }
 
@@ -31,3 +34,10 @@
     </table>
 
 </div>
+
+}
+
+else
+{
+    <h2>@Html.ActionLink("Zaloguj się, aby mieć dostęp do tej strony.", "Login", "Account")</h2>
+}

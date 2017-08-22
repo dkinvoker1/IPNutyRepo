@@ -20,7 +20,7 @@ namespace IPNuty.ViewModels.Admin
         public string lastName { get; set; }
 
         [Required]
-        [Display(Name = "Altywność")]
+        [Display(Name = "Aktywność")]
         public bool activicity { get; set; }
 
         [Required]

@@ -1,4 +1,8 @@
-﻿@model IEnumerable<IPNuty.Models.Order>
+﻿@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+
+
+@model IEnumerable<IPNuty.Models.Order>
 @{
     ViewBag.Title = "Zamówienia chórzystów"; //to jest tytuł strony
 }
@@ -99,3 +103,10 @@
         @* Kolejne wiersze to wartości z listy (po zaznaczeniu checkboxów). Dostępne egzemplarze pobierane są z bazy, Potrzebna ilość to różnica między nimi *@
     </table>
 </div>
+
+    }
+
+    else
+    {
+        <h2>@Html.ActionLink("Zaloguj się, aby mieć dostęp do tej strony.", "Login", "Account")</h2>
+    }
