@@ -16,5 +16,16 @@ namespace IPNuty.Models.Collections
             }
 
         }
+
+        public static void UpdateSinger(Singer updatedSinger)
+        {
+            using (ApplicationDbContext dbcontext = new ApplicationDbContext())
+            {
+                dbcontext.Singers.Remove(updatedSinger);
+                dbcontext.Singers.Add(updatedSinger);
+                dbcontext.SaveChangesAsync();
+            }
+
+        }
     }
 }

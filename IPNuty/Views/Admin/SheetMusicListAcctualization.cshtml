@@ -28,7 +28,10 @@
                 <td>@item.Author</td>
                 <td>@item.Title</td>
                 <td>...</td>
-                <td><button>Usuń nuty</button></td>
+                <td><input type="button" value="Usuń nuty" onclick="location.href='@Url.Action("RemoveSheetMusic")?@item'" />
+               </td >
+                
+
             </tr>
         }
     </table>

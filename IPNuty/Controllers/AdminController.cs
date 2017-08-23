@@ -8,6 +8,8 @@ using IPNuty.ViewModels.Admin;
 using IPNuty.Models;
 using IPNuty.Models.Managers.Admin;
 using System.Threading.Tasks;
+using System.Net;
+using IPNuty.Models.Collections;
 
 namespace IPNuty.Controllers
 {
@@ -123,6 +125,26 @@ namespace IPNuty.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+
+        // GET
+        public ActionResult RemoveSheetMusic(SheetMusic sheet)
+        {
+            if (sheet == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var allSheets = SheetMusicCollection.GetAllSheetMusic();
+            if (allSheets.Contains(sheet))
+            {
+                SheetMusicManager sheetManager = new SheetMusicManager();
+                sheetManager.RemoveSheetMusic(sheet);
+                ViewBag.Message = "Usunięto nuty z bazy!";
+                ModelState.Clear(); 
+            }
+            return View();
+        }
         #endregion
+
     }
 }
