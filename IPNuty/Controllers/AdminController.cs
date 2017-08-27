@@ -126,24 +126,26 @@ namespace IPNuty.Controllers
             return View(model);
         }
 
-
-        // GET
-        public ActionResult RemoveSheetMusic(SheetMusic sheet)
+        //GET
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RemoveSheetMusic(SheetMusic sheetToDelete)
         {
-            if (sheet == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            SheetMusic sheet;
             var allSheets = SheetMusicCollection.GetAllSheetMusic();
+            sheet = allSheets.Where(e => e.SheetMusicId == sheetToDelete.SheetMusicId).FirstOrDefault();
             if (allSheets.Contains(sheet))
             {
                 SheetMusicManager sheetManager = new SheetMusicManager();
                 sheetManager.RemoveSheetMusic(sheet);
                 ViewBag.Message = "Usunięto nuty z bazy!";
-                ModelState.Clear(); 
+                ModelState.Clear();
+                //return View("~/Views/Admin/SheetMusicListAcctualization.");
             }
-            return View();
+            //var addNewSheetMusic = new SheetMusicListAcctualization();
+            return View("Home");
         }
+
         #endregion
 
     }

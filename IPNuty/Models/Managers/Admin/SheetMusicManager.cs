@@ -25,7 +25,8 @@ namespace IPNuty.Models.Managers.Admin
         {
             using (var db = new ApplicationDbContext())
             {
-                db.SheetsOfMusic.Remove(sheetMusic);
+                var del=db.SheetsOfMusic.Where(e => e.SheetMusicId == sheetMusic.SheetMusicId).FirstOrDefault();
+                db.SheetsOfMusic.Remove(del);
                 db.SaveChanges();
             }
         }

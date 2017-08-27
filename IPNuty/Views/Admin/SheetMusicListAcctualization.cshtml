@@ -28,7 +28,27 @@
                 <td>@item.Author</td>
                 <td>@item.Title</td>
                 <td>...</td>
-                <td><input type="button" value="Usuń nuty" onclick="location.href='@Url.Action("RemoveSheetMusic")?@item'" />
+                <td>
+                    @Html.ActionLink("Usuń", "RemoveSheetMusic",item)
+                    @*@using (Html.BeginForm("RemoveSheetMusic", "AdminController"))
+                    {
+                        @Html.ActionLink(
+                                            linkText: "Usuń nuty",
+                                            actionName: "RemoveSheetMusic",
+                                            controllerName: "AdminController",
+                                            routeValues: new
+                                            {
+                                                sheet = item
+                                            },
+                                            htmlAttributes: null
+                                        )
+
+                    }*@
+
+                    @*<a href="~/Controllers/AdminController.cs/RemoveSheetMusic">
+                        <input type="button" value="Usuń nuty"/>
+                    </a>*@
+                    
                </td >
                 
 
