@@ -105,6 +105,7 @@ namespace IPNuty.Controllers
         public ActionResult AddNewSheetMusic()
         {
             var addNewSheetMusic = new AddNewSheetMusicModel();
+            
             return View(addNewSheetMusic);
         }
         // POST: /Admin/AddSheetMusic
@@ -117,7 +118,8 @@ namespace IPNuty.Controllers
                 SheetMusic sheet = new SheetMusic(model.title, model.author, model.type);
                 SheetMusicManager sheetManager = new SheetMusicManager();
                 sheetManager.AddSheetMusic(sheet);
-                ViewBag.Message = "Dodano nuty do bazy!";
+                //ViewBag.Message = "Dodano nuty do bazy!";
+                TempData["msg"] = "<script>alert('Pomyślnie dodano nuty do bazy.');</script>";
                 ModelState.Clear();
                 return View();
                 //return RedirectToAction("AddNewSheetMusic", "Admin");
@@ -136,17 +138,19 @@ namespace IPNuty.Controllers
             sheet = allSheets.Where(e => e.SheetMusicId == sheetToDelete.SheetMusicId).FirstOrDefault();
             if (allSheets.Contains(sheet))
             {
+                ViewBag.Message = sheetToDelete.Author + ", " + sheetToDelete.Title +".";
                 SheetMusicManager sheetManager = new SheetMusicManager();
                 sheetManager.RemoveSheetMusic(sheet);
-                ViewBag.Message = "Usunięto nuty z bazy!";
                 ModelState.Clear();
-                //return View("~/Views/Admin/SheetMusicListAcctualization.");
+                
+                return View("RemoveSM");
             }
-            //var addNewSheetMusic = new SheetMusicListAcctualization();
-            return View("Home");
+            return View("Home"); //z tym działa prawie dobrze
+
         }
 
         #endregion
+
 
     }
 }

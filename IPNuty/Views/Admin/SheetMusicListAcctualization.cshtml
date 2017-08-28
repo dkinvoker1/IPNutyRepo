@@ -27,28 +27,17 @@
             <tr>
                 <td>@item.Author</td>
                 <td>@item.Title</td>
-                <td>...</td>
+                @if (item.Type.Equals("5"))
+                {
+                    <td>inne</td>
+                }
+                else
+                {
+                    <td>@item.Type</td>
+                }
                 <td>
                     @Html.ActionLink("Usuń", "RemoveSheetMusic",item)
-                    @*@using (Html.BeginForm("RemoveSheetMusic", "AdminController"))
-                    {
-                        @Html.ActionLink(
-                                            linkText: "Usuń nuty",
-                                            actionName: "RemoveSheetMusic",
-                                            controllerName: "AdminController",
-                                            routeValues: new
-                                            {
-                                                sheet = item
-                                            },
-                                            htmlAttributes: null
-                                        )
-
-                    }*@
-
-                    @*<a href="~/Controllers/AdminController.cs/RemoveSheetMusic">
-                        <input type="button" value="Usuń nuty"/>
-                    </a>*@
-                    
+                   
                </td >
                 
 

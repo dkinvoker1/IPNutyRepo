@@ -24,14 +24,14 @@ namespace IPNuty.Models
 
         public SheetMusic()
         {
-/**/
+
         }
 
         public SheetMusic(string title, string author, int type)
         {
             this.Title = title;
             this.Author = author;
-            this.Type = (MusicType)type;
+            this.Type = (MusicType)type-1;
         }
     }
 }
