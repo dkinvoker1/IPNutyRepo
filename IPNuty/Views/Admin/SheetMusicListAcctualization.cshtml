@@ -11,8 +11,6 @@
 <hr />
 <div>
     @Html.ActionLink("Dodaj nowy zestaw nut", "AddNewSheetMusic")
-    @*<input type="button" value="Dodaj nowy zestaw nut" onclick="location.href='@Url.Action("AddNewSheetMusic")'" />*@
-    @*Najpierw podajemy widok, potem ew. folder*@
 </div>
 <div>
     <table>
@@ -27,26 +25,12 @@
             <tr>
                 <td>@item.Author</td>
                 <td>@item.Title</td>
-                @if (item.Type.Equals("5"))
-                {
-                    <td>inne</td>
-                }
-                else
-                {
-                    <td>@item.Type</td>
-                }
-                <td>
-                    @Html.ActionLink("Usuń", "RemoveSheetMusic",item)
-                   
-               </td >
-                
-
+                <td>@item.Type</td>
+                <td>@Html.ActionLink("Usuń", "RemoveSheetMusic",item)</td>
             </tr>
         }
     </table>
-
 </div>
-
 }
 
 else

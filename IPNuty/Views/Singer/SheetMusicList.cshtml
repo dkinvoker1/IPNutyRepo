@@ -19,8 +19,17 @@
                 <td>@item.Author</td>
                 <td>@item.Title</td>
                 <td>@item.Type</td>
-                <td>Tak/Nie</td>
-                <td><button>Usuń nuty/Zamów nuty</button></td>
+
+
+                @if (item.SingerID!=null && item.SingerID.Name+ item.SingerID.LastName == User.Identity.Name)
+                {
+                    <td>Tak</td>
+                }
+                else
+                {
+                    <td>Nie</td>
+                }
+                <td>Usuń nuty/Zamów nuty/@Html.ActionLink("Posiadane", "AddNewSheetMusicToSinger", item)</td>
             </tr>
          }
     </table>

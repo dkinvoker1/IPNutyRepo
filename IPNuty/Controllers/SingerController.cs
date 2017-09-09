@@ -8,6 +8,7 @@ using IPNuty.ViewModels.Singers;
 using System.Threading.Tasks;
 using IPNuty.Models;
 using IPNuty.Models.Collections;
+using Microsoft.AspNet.Identity;
 
 namespace IPNuty.Controllers
 {
@@ -35,22 +36,36 @@ namespace IPNuty.Controllers
             return View(sheetMusicListAcctualizationViewModel.allSheetMusicList);
         }
 
-        // POST: /Songer/AddSheetMusic
-        [HttpPost]
+        //GET
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> AddNewSheetMusicToSinger()
+        public ActionResult AddNewSheetMusicToSinger(SheetMusic sheetToAdd)
         {
-            //tutaj trzeba będzie określić jakoś tego singera -> do zrobienia potem
-            var singers = SingersCollection.GetAllSingers();
-            Singer thisSinger = singers[1];
+            string userID = User.Identity.GetUserName();
+            var allSingers = SingersCollection.GetAllSingers();
+            Singer thisSinger = allSingers.Where(e => e.Name+e.LastName == userID).FirstOrDefault();
+            //to jest do zmiany!
+            if(thisSinger==null)
+            {
+                ViewBag.Message = "Musisz być zalogowany aby dodać nuty!";
+                return View("Home");
+            }
 
-            SheetMusic sheet = new SheetMusic("Adelajda!", "Panteon", 1);
-
-            thisSinger.SingerSheetMusicList.Add(sheet);
+            if (thisSinger.SingerSheetMusicList == null) 
+            {
+                thisSinger.SingerSheetMusicList = new List<SheetMusic>();
+            }
+            var typ = sheetToAdd.Type.GetHashCode();
+            sheetToAdd = new SheetMusic(sheetToAdd.Title, sheetToAdd.Author, typ);
+            thisSinger.SingerSheetMusicList.Add(sheetToAdd);
             SingersCollection.UpdateSinger(thisSinger);
 
-            ViewBag.Message = "Dodano nuty do bazy!";
-            return View();
+
+
+
+
+            ViewBag.Message = "Dodano nuty jako posiadane!";
+            return View("Home");
         }
     }
 }

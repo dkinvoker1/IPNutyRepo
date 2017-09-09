@@ -11,6 +11,10 @@ namespace IPNuty.Models
         public string Title { get; set; }
         public string Author { get; set; }
 
+        public virtual Singer SingerID { get; set; }
+
+        public MusicType Type { get; set; }
+
         public enum MusicType
         {
             rozrywkowe,
@@ -20,7 +24,7 @@ namespace IPNuty.Models
             inne
         }
 
-        public MusicType Type { get; set; }
+
 
         public SheetMusic()
         {
@@ -31,7 +35,7 @@ namespace IPNuty.Models
         {
             this.Title = title;
             this.Author = author;
-            this.Type = (MusicType)type-1;
+            this.Type = (MusicType)type;
         }
     }
 }

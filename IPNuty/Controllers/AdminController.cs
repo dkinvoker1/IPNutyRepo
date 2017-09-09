@@ -21,7 +21,6 @@ namespace IPNuty.Controllers
             return View();
         }
 
-        //
         // GET: /Admin/
         public ActionResult Order()
         {
@@ -29,7 +28,6 @@ namespace IPNuty.Controllers
             return View(orderViewModel.AllOrdersList);
         }
 
-        //
         // GET: /Admin/
         public ActionResult SheetMusicListAcctualization()
         {
@@ -37,16 +35,12 @@ namespace IPNuty.Controllers
             return View(sheetMusicListAcctualization.allSheetMusicList);
         }
 
-
-        //
         // GET: /Admin/
         public ActionResult SingerListAcctualization()
         {
             var singersListAcctualization = new SingersListAcctualizationViewModel();
             return View(singersListAcctualization.allSingersList);
         }
-
-
 
         public ActionResult ChangeSingerActivicity(int singerId)
         {
@@ -58,7 +52,7 @@ namespace IPNuty.Controllers
             var singersListAcctualization = new SingersListAcctualizationViewModel();
             return View(singersListAcctualization.allSingersList);
         }
-        //
+        
         // GET: /Admin/
         public ActionResult SingersSheetMusicListAcctualization()
         {
@@ -105,9 +99,9 @@ namespace IPNuty.Controllers
         public ActionResult AddNewSheetMusic()
         {
             var addNewSheetMusic = new AddNewSheetMusicModel();
-            
             return View(addNewSheetMusic);
         }
+
         // POST: /Admin/AddSheetMusic
         [HttpPost]
         [AllowAnonymous]
@@ -115,16 +109,14 @@ namespace IPNuty.Controllers
         {
             if (ModelState.IsValid)
             {
-                SheetMusic sheet = new SheetMusic(model.title, model.author, model.type);
+                SheetMusic sheet = new SheetMusic(model.title, model.author, model.type-1);
                 SheetMusicManager sheetManager = new SheetMusicManager();
                 sheetManager.AddSheetMusic(sheet);
-                //ViewBag.Message = "Dodano nuty do bazy!";
                 TempData["msg"] = "<script>alert('Pomyślnie dodano nuty do bazy.');</script>";
                 ModelState.Clear();
                 return View();
                 //return RedirectToAction("AddNewSheetMusic", "Admin");
             }
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -142,11 +134,9 @@ namespace IPNuty.Controllers
                 SheetMusicManager sheetManager = new SheetMusicManager();
                 sheetManager.RemoveSheetMusic(sheet);
                 ModelState.Clear();
-                
                 return View("RemoveSM");
             }
             return View("Home"); //z tym działa prawie dobrze
-
         }
 
         #endregion

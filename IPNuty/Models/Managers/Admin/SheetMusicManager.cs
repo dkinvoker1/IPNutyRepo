@@ -11,7 +11,7 @@ namespace IPNuty.Models.Managers.Admin
     public class SheetMusicManager
     {
 
-        public void AddSheetMusic(SheetMusic sheetMusic)
+        public void AddSheetMusic(SheetMusic sheetMusic) //admin dodaje nowe nuty do bazy
         {
             using (var db = new ApplicationDbContext())
             {
@@ -21,7 +21,7 @@ namespace IPNuty.Models.Managers.Admin
 
         }
 
-        public void RemoveSheetMusic(SheetMusic sheetMusic)
+        public void RemoveSheetMusic(SheetMusic sheetMusic) //admin usuwa nuty z bazy
         {
             using (var db = new ApplicationDbContext())
             {
@@ -31,7 +31,7 @@ namespace IPNuty.Models.Managers.Admin
             }
         }
 
-        public void SheetMusicTitleUpdate(SheetMusic sheetMusic, string title)
+        public void SheetMusicTitleUpdate(SheetMusic sheetMusic, string title) //brakuje wywołania
         {
             using (var db = new ApplicationDbContext())
             {
@@ -41,7 +41,7 @@ namespace IPNuty.Models.Managers.Admin
             }
         }
 
-        public void SheetMusicAuthorUpdate(SheetMusic sheetMusic, string author)
+        public void SheetMusicAuthorUpdate(SheetMusic sheetMusic, string author) //brakuje wywołania
         {
             using (var db = new ApplicationDbContext())
             {

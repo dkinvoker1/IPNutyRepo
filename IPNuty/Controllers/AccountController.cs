@@ -17,7 +17,6 @@ namespace IPNuty.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        
         public ApplicationSignInManager SignInManager
         {
             get
@@ -101,7 +100,8 @@ namespace IPNuty.Controllers
         {
             if (ModelState.IsValid)
             {
-                Singer singer = new Singer.Builder(model.Name,model.Surename).SetActivicity(model.Activity).build();
+                SheetMusic a = new SheetMusic("aaa", "bbb", 1);
+                Singer singer = new Singer.Builder(model.Name,model.Surename).SetActivicity(model.Activity).AddSheetMusic(a).build();
                 
                 var user = new ApplicationUser {UserName = model.Name+model.Surename ,SingerId=singer};
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -121,9 +121,6 @@ namespace IPNuty.Controllers
                 AddErrors(result);
             }
 
-
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -133,21 +130,20 @@ namespace IPNuty.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            //tymczasowo bardzo, nie wiedziałem gdzie to wrzucić żeby wytestować
-            //using (var db = new ApplicationDbContext())
-            //{
-            //    var nuta1 = new SheetMusic("Earth Song", "Frank Tichieli", 5);
-            //    var nuta2 = new SheetMusic("Lux Aurumque", "Eric Whitacre", 2);
-
-            //    var muzyk = new Singer.Builder("Magda", "Magdzińska").build();
-
-            //    //db.Singers.Add(muzyk);
-            //    db.SheetsOfMusic.Add(nuta1);
-            //    db.SaveChanges();
-            //}
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
+
+
+        // GET:
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult LogOff2()
+        {
+            AuthenticationManager.SignOut();
+            return View("Index");
+        }
+
 
 
         private IAuthenticationManager AuthenticationManager

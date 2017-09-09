@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 
@@ -11,8 +12,18 @@ namespace IPNuty.Models.Collections
         {
             using (ApplicationDbContext dbcontext = new ApplicationDbContext())
             {
+                dbcontext.Configuration.LazyLoadingEnabled = false;
                 List<Singer> AllSingers = dbcontext.Singers.ToList();
-                return AllSingers;
+                foreach (var singer in AllSingers)
+                {
+                    singer.SingerSheetMusicList = new List<SheetMusic>();
+                    var singerSheets = dbcontext.SheetsOfMusic.Where(e=>e.SingerID.SingerId==singer.SingerId).ToList();
+                    if(singerSheets.Count>0)
+                    {
+                        singer.SingerSheetMusicList = singerSheets;
+                    }
+                }
+                    return AllSingers;
             }
 
         }
@@ -21,9 +32,19 @@ namespace IPNuty.Models.Collections
         {
             using (ApplicationDbContext dbcontext = new ApplicationDbContext())
             {
-                dbcontext.Singers.Remove(updatedSinger);
-                dbcontext.Singers.Add(updatedSinger);
-                dbcontext.SaveChangesAsync();
+                var del = dbcontext.Singers.Where(e => e.Name == updatedSinger.Name && e.LastName == updatedSinger.LastName).FirstOrDefault();
+                if (del != null)
+                {
+                    foreach (var item in updatedSinger.SingerSheetMusicList)
+                    {
+                        if (item.SingerID==null)
+                        {
+                            del.SingerSheetMusicList.Add(item);
+                        }
+                    }
+                    dbcontext.Singers.AddOrUpdate(del);
+                }
+                dbcontext.SaveChanges();
             }
 
         }

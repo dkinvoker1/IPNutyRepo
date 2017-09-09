@@ -14,6 +14,7 @@
         <ul class="nav navbar-nav navbar-right">
             @*to jest ta linijka powodujaca bugi!*@
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
+            <li>@Html.ActionLink("Wyloguj się", "LogOff")</li>
         </ul>
     }
 }

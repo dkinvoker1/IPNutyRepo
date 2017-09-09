@@ -14,6 +14,8 @@ namespace IPNuty.Models.Collections
 
             using (ApplicationDbContext dbcontext = new ApplicationDbContext())
             {
+                dbcontext.Configuration.LazyLoadingEnabled = false;
+                List<Singer> AllSingers = dbcontext.Singers.ToList();
                 List<SheetMusic> AllSheetMusic = dbcontext.SheetsOfMusic.ToList();
                 return AllSheetMusic;
             }

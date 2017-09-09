@@ -194,6 +194,14 @@
     <Compile Include="Migrations\201707141626503_Zmiana_Id_singera_w_rejestracji.Designer.cs">
       <DependentUpon>201707141626503_Zmiana_Id_singera_w_rejestracji.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708291744533_AddSingerIDtoSheetMusic.cs" />
+    <Compile Include="Migrations\201708291744533_AddSingerIDtoSheetMusic.Designer.cs">
+      <DependentUpon>201708291744533_AddSingerIDtoSheetMusic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708291806032_SheetMusicListInSingerHangedToVirtual.cs" />
+    <Compile Include="Migrations\201708291806032_SheetMusicListInSingerHangedToVirtual.Designer.cs">
+      <DependentUpon>201708291806032_SheetMusicListInSingerHangedToVirtual.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\LoginAndRegister\AccountViewModels.cs" />
     <Compile Include="Models\Collections\OrdersCollection.cs" />
@@ -228,7 +236,6 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Admin\AddNewSheetMusic.cshtml" />
-    <Content Include="Views\Admin\AddNewSinger.cshtml" />
     <Content Include="Views\Admin\Order.cshtml" />
     <Content Include="Views\Admin\SheetMusicListAcctualization.cshtml" />
     <Content Include="Views\Admin\SingerListAcctualization.cshtml" />
@@ -269,6 +276,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707141626503_Zmiana_Id_singera_w_rejestracji.resx">
       <DependentUpon>201707141626503_Zmiana_Id_singera_w_rejestracji.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708291744533_AddSingerIDtoSheetMusic.resx">
+      <DependentUpon>201708291744533_AddSingerIDtoSheetMusic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708291806032_SheetMusicListInSingerHangedToVirtual.resx">
+      <DependentUpon>201708291806032_SheetMusicListInSingerHangedToVirtual.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

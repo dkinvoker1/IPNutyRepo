@@ -12,7 +12,7 @@ namespace IPNuty.Models
         public string LastName { get; set; }
         public bool Activicity { get; set; }
         public DateTime JoiningDate { get; set; }
-        public List<SheetMusic> SingerSheetMusicList { get; set; }
+        public virtual List<SheetMusic> SingerSheetMusicList { get; set; }
 
         public Singer()
         {
@@ -25,6 +25,7 @@ namespace IPNuty.Models
             this.LastName = builder.LastName;
             this.JoiningDate = builder.JoiningDate;
             this.Activicity = builder.Activicity;
+            this.SingerSheetMusicList = builder.SingerSheetMusicList;
         }
 
         public class Builder
@@ -33,7 +34,7 @@ namespace IPNuty.Models
             public string LastName = null;
             public bool Activicity = true;
             public DateTime JoiningDate = DateTime.Now;
-            public List<SheetMusic> SingerSheetMusicList = null;
+            public List<SheetMusic> SingerSheetMusicList = new List<SheetMusic>(); //było jako null
 
             public Builder(string name, string lastName)
             {
@@ -50,6 +51,12 @@ namespace IPNuty.Models
             public Builder SetJoiningDate(DateTime joiningDate)
             {
                 this.JoiningDate = joiningDate;
+                return this;
+            }
+
+            public Builder AddSheetMusic(SheetMusic sheet)
+            {
+                SingerSheetMusicList.Add(sheet);
                 return this;
             }
 
