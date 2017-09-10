@@ -13,7 +13,8 @@
             <td>Czy posiadane</td>
             <td>Akcja</td>
         </tr>
-        @foreach (var item in Model)
+        @{ var sing = Model.Where(e => e.SingerID != null && e.SingerID.Name + e.SingerID.LastName == User.Identity.Name).ToList();}
+        @foreach (var item in Model.Where(e=>e.SingerID==null))
          {
             <tr>
                 <td>@item.Author</td>
@@ -21,7 +22,9 @@
                 <td>@item.Type</td>
 
 
-                @if (item.SingerID!=null && item.SingerID.Name+ item.SingerID.LastName == User.Identity.Name)
+                @*@if (item.SingerID != null && item.SingerID.Name + item.SingerID.LastName == User.Identity.Name)*@
+                @{ var cos = sing.Where(e => e.Author == item.Author && e.Title == item.Title && e.Type == item.Type).ToList();}
+                @if (cos.Count>0)
                 {
                     <td>Tak</td>
                     <td>Usuń nuty/Zamów nuty/@Html.ActionLink("Nie posiadane", "SubtractSheetMusicFromSinger", item)</td>
