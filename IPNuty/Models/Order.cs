@@ -9,7 +9,6 @@ namespace IPNuty.Models
     {
         public int OrderId { get; set; }
         public Singer singer;
-        public List<SheetMusic> orderedSheetMusicList;
         public DateTime orderTime;
         public bool completed;
 
@@ -25,7 +24,6 @@ namespace IPNuty.Models
         public class Builder
         {
             public Singer singer = null;
-            public List<SheetMusic> orderedSheetMusicList = null;
             public DateTime orderTime = DateTime.Now;
             public bool completed = false;
 

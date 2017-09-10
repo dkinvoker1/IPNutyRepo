@@ -13,36 +13,12 @@ namespace IPNuty.Models.Managers.Singers
 
         public void CreateNewOrder( Singer singer)
         {
-            order = new Order.Builder(singer).Build();
+            order = new Order.Builder(singer).SetOrderTime(DateTime.Now).SetOrderStatus(false).Build();
         }
-
-        public void AddSheetMusic(SheetMusic sheetMusic)
+         public List<Order> GetAllSingerOrders(Singer singer)
         {
-            if (order != null)
-            {
-                order.orderedSheetMusicList.Add(sheetMusic);
-            }
-        }
-
-        public void RemoveSheetMusic(SheetMusic sheetMusic)
-        {
-            if (order != null)
-            {
-                order.orderedSheetMusicList.Remove(sheetMusic);
-            }
-        }
-
-
-        public void ExecuteOrder(Order order)
-        {
-            if (order != null)
-            {
-                bool isEmpty = !order.orderedSheetMusicList.Any();
-                if (!isEmpty)
-                {
-                    //OrdersCollection.GetAllOrdersList().Add(order);
-                }
-            }
+            List<Order> singerOrdersList = OrdersCollection.GetAllOrders().Where(o => o.singer == singer && o.completed == false).ToList();
+            return singerOrdersList;
         }
     }
 }

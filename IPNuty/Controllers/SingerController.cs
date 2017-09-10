@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using IPNuty.Models;
 using IPNuty.Models.Collections;
 using Microsoft.AspNet.Identity;
+using IPNuty.Models.Managers.Admin;
 
 namespace IPNuty.Controllers
 {
@@ -98,6 +99,35 @@ namespace IPNuty.Controllers
 
             ViewBag.Message = "Dodano nuty jako posiadane!";
             return View("Home");
+        }
+
+        //GET
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult OrderSheetMusic(SheetMusic sheetToOrder)
+        {
+            string userID = User.Identity.GetUserName();
+            var allSingers = SingersCollection.GetAllSingers();
+            Singer thisSinger = allSingers.Where(e => e.Name + e.LastName == userID).FirstOrDefault();
+
+            var type = sheetToOrder.Type.GetHashCode();
+            sheetToOrder = new SheetMusic(sheetToOrder.Title, sheetToOrder.Author, type);
+
+            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.Now).SetOrderStatus(false).Build();
+
+            if (thisSinger == null)
+            {
+                ViewBag.Message = "Musisz być zalogowany aby odjąć nuty!";
+                return View("Order");
+            }
+            else
+            {
+                OrdersManager orderManager = new OrdersManager();
+                orderManager.AddOrder(thisOrder);
+
+                ViewBag.Message = "Złożono zamówienie na nuty!";
+                return View("Order");
+            }
         }
     }
 }
