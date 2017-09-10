@@ -60,9 +60,41 @@ namespace IPNuty.Controllers
             thisSinger.SingerSheetMusicList.Add(sheetToAdd);
             SingersCollection.UpdateSinger(thisSinger);
 
+            ViewBag.Message = "Dodano nuty jako posiadane!";
+            return View("Home");
+        }
 
+        //GET
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult SubtractSheetMusicFromSinger(SheetMusic sheetToSubtract)
+        {
+            string userID = User.Identity.GetUserName();
+            var allSingers = SingersCollection.GetAllSingers();
+            Singer thisSinger = allSingers.Where(e => e.Name + e.LastName == userID).FirstOrDefault();
+            //to jest do zmiany!
+            if (thisSinger == null)
+            {
+                ViewBag.Message = "Musisz być zalogowany aby odjąć nuty!";
+                return View("Home");
+            }
 
-
+            if (thisSinger.SingerSheetMusicList == null)
+            {
+                thisSinger.SingerSheetMusicList = new List<SheetMusic>();
+            }
+            //var typ = sheetToSubtract.Type.GetHashCode();
+            //sheetToSubtract = new SheetMusic(sheetToSubtract.Title, sheetToSubtract.Author, typ);
+            sheetToSubtract.SingerID = thisSinger;
+            var index=thisSinger.SingerSheetMusicList.FindIndex(e=>
+                                                                    e.Author==sheetToSubtract.Author &&
+                                                                    e.SheetMusicId==sheetToSubtract.SheetMusicId &&
+                                                                    e.SingerID==sheetToSubtract.SingerID &&
+                                                                    e.Title==sheetToSubtract.Title &&
+                                                                    e.Type==sheetToSubtract.Type
+                                                                    );
+            thisSinger.SingerSheetMusicList.RemoveAt(index);
+            SingersCollection.UpdateSinger(thisSinger);
 
             ViewBag.Message = "Dodano nuty jako posiadane!";
             return View("Home");

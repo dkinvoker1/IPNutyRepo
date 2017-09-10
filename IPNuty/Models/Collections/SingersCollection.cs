@@ -35,11 +35,28 @@ namespace IPNuty.Models.Collections
                 var del = dbcontext.Singers.Where(e => e.Name == updatedSinger.Name && e.LastName == updatedSinger.LastName).FirstOrDefault();
                 if (del != null)
                 {
-                    foreach (var item in updatedSinger.SingerSheetMusicList)
+                    if (del.SingerSheetMusicList.Count< updatedSinger.SingerSheetMusicList.Count)
                     {
-                        if (item.SingerID==null)
+                        foreach (var item in updatedSinger.SingerSheetMusicList)
                         {
-                            del.SingerSheetMusicList.Add(item);
+                            if (item.SingerID == null)
+                            {
+                                del.SingerSheetMusicList.Add(item);
+                            }
+                        }
+                    }
+                    else if(del.SingerSheetMusicList.Count == updatedSinger.SingerSheetMusicList.Count)
+                    {
+                        return;
+                    }
+                    else if (del.SingerSheetMusicList.Count > updatedSinger.SingerSheetMusicList.Count)
+                    {
+                        var toBeLeft = updatedSinger.SingerSheetMusicList.Select(e => e.SheetMusicId);
+                        var toBeRemoved = new List<SheetMusic>(del.SingerSheetMusicList.Where(e => !toBeLeft.Contains(e.SheetMusicId)));
+                        foreach (var item in toBeRemoved)
+                        {
+                            del.SingerSheetMusicList.Remove(item);
+                            dbcontext.SheetsOfMusic.Remove(item);
                         }
                     }
                     dbcontext.Singers.AddOrUpdate(del);
