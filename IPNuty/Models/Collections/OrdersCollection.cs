@@ -16,5 +16,12 @@ namespace IPNuty.Models.Collections
             }
 
         }
+
+        public static List<Order> GetAllSingerOrders(Singer singer)
+        {
+            List<Order> singerOrdersList = OrdersCollection.GetAllOrders().Where(o => o.singer == singer && o.completed == false).ToList();
+            return singerOrdersList;
+        }
+
     }
 }

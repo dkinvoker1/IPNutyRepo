@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using IPNuty.Models;
 using IPNuty.Models.Collections;
 using Microsoft.AspNet.Identity;
-using IPNuty.Models.Managers.Admin;
+using IPNuty.Models.Managers.Singers;
 
 namespace IPNuty.Controllers
 {
@@ -113,11 +113,11 @@ namespace IPNuty.Controllers
             var type = sheetToOrder.Type.GetHashCode();
             sheetToOrder = new SheetMusic(sheetToOrder.Title, sheetToOrder.Author, type);
 
-            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.Now).SetOrderStatus(false).Build();
+            Order thisOrder = new Order.Builder(thisSinger).SetOrderedSheetMusic(sheetToOrder).SetOrderTime(DateTime.Now).SetOrderStatus(false).Build();
 
             if (thisSinger == null)
             {
-                ViewBag.Message = "Musisz być zalogowany aby odjąć nuty!";
+                ViewBag.Message = "Musisz być zalogowany aby zamówić nuty!";
                 return View("Order");
             }
             else

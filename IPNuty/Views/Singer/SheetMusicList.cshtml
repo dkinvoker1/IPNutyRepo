@@ -24,12 +24,12 @@
                 @if (item.SingerID!=null && item.SingerID.Name+ item.SingerID.LastName == User.Identity.Name)
                 {
                     <td>Tak</td>
-                    <td>Usuń nuty/Zamów nuty/@Html.ActionLink("Nie posiadane", "SubtractSheetMusicFromSinger", item)</td>
+                    <td>@Html.ActionLink("Oznacz jako nieposiadane", "SubtractSheetMusicFromSinger", item)</td>
                 }
                 else
                 {
                     <td>Nie</td>
-                    <td>Usuń nuty/@Html.ActionLink("Zamów nuty", "OrderSheetMusic", item)/@Html.ActionLink("Posiadane", "AddNewSheetMusicToSinger", item)</td>
+                    <td>@Html.ActionLink("Zamów nuty", "OrderSheetMusic", item)/@Html.ActionLink("Oznacz jako posiadane", "AddNewSheetMusicToSinger", item)</td>
                 }
                 
             </tr>
