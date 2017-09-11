@@ -100,8 +100,7 @@ namespace IPNuty.Controllers
         {
             if (ModelState.IsValid)
             {
-                SheetMusic a = new SheetMusic("aaa", "bbb", 1);
-                Singer singer = new Singer.Builder(model.Name,model.Surename).SetActivicity(model.Activity).AddSheetMusic(a).build();
+                Singer singer = new Singer.Builder(model.Name,model.Surename).SetActivicity(model.Activity).build();
                 
                 var user = new ApplicationUser {UserName = model.Name+model.Surename ,SingerId=singer};
                 var result = await UserManager.CreateAsync(user, model.Password);
