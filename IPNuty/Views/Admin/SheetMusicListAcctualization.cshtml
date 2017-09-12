@@ -28,7 +28,7 @@
                 <td>@item.Author</td>
                 <td>@item.Title</td>
                 <td>@item.Type</td>
-                <td>Html.ActionLink("Usuń nuty", "RemoveSheetMusic","Account",item,null)</td>
+                <td>@Html.ActionLink("Usuń nuty", "RemoveSheetMusic",item)</td>
             </tr>
         }
     </table>

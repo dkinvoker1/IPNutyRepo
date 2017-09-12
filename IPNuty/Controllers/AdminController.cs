@@ -10,6 +10,8 @@ using IPNuty.Models.Managers.Admin;
 using System.Threading.Tasks;
 using System.Net;
 using IPNuty.Models.Collections;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace IPNuty.Controllers
 {
@@ -171,20 +173,49 @@ namespace IPNuty.Controllers
             }
             return View("SheetMusicListAcctualization", sheets.ToList());
         }
+        //========================================================================
+        //to jest do usuwania singerów ->przenieść do góry
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
 
-        ///// <summary>
-        ///// Usuwanie singera przez admina
-        ///// </summary>
-        ///// <param name="singerToBeDeleted"> Singer który ma być usunięty </param>
-        ///// <returns></returns>
-        //// GET:
-        //[HttpGet]
-        //[Authorize(Roles = "Admin")]
-        //public ActionResult DeleteUser(Singer singerToBeDeleted)
-        //{
-        //    AccountController cont = new AccountController();
-        //    return cont.DeleteUser(singerToBeDeleted);
-        //}
+            private set
+            {
+                _userManager = value;
+            }
+        }
+        /// <summary>
+        /// Usuwanie singera przez admina
+        /// </summary>
+        /// <param name="singerToBeDeleted"> Singer który ma być usunięty </param>
+        /// <returns></returns>
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteUser(Singer singerToBeDeleted)
+        {
+            //pobranie identity singera (hasła, role, logint)
+            //var identitySinger = UserManager.Users.Where(e => e.SingerId == singerToBeDeleted).FirstOrDefault();
+            //var UserContext = new ApplicationDbContext();
+            //var users = UserContext.Users.ToList();
+            var identitySingers = UserManager.Users.ToArray();
+            var identitySinger = identitySingers.Where(e => e.SingerId == singerToBeDeleted).FirstOrDefault();
+            //usunięcie wszystkich nut singera
+            SheetMusicManager musicManager = new SheetMusicManager();
+            musicManager.RemoveSheetMusic(singerToBeDeleted);
+            //tutaj to samo co wyżej ale dla orderów jak Ola zrobi
+            //====================================================
+
+            //====================================================
+            UserManager.RemoveFromRole(identitySinger.Id, "Singer");
+            UserManager.Delete(identitySinger);
+            //return View("Index");
+            return new EmptyResult();
+        }
         #endregion
 
 
