@@ -11,6 +11,7 @@ namespace IPNuty.Models
         public Singer singer;
         public DateTime orderTime;
         public bool completed;
+        public SheetMusic SheetMusic;
 
         public Order()
         {
@@ -26,10 +27,16 @@ namespace IPNuty.Models
             public Singer singer = null;
             public DateTime orderTime = DateTime.Now;
             public bool completed = false;
+            public SheetMusic sheetMusic = null;
 
             public Builder(Singer singer)
             {
                 this.singer = singer;
+            }
+            public Builder SetOrderedSheetMusic(SheetMusic sheetMusic)
+            {
+                this.sheetMusic = sheetMusic;
+                return this;
             }
 
             public Builder SetOrderTime(DateTime orderTime)

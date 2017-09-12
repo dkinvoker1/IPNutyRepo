@@ -11,14 +11,15 @@ namespace IPNuty.Models.Managers.Singers
     {
         Order order;
 
-        public void CreateNewOrder( Singer singer)
+        public void AddOrder(Order order)
         {
-            order = new Order.Builder(singer).SetOrderTime(DateTime.Now).SetOrderStatus(false).Build();
+            using (var db = new ApplicationDbContext())
+            {
+                db.Orders.Add(order);
+                db.SaveChanges();
+            }
+
         }
-         public List<Order> GetAllSingerOrders(Singer singer)
-        {
-            List<Order> singerOrdersList = OrdersCollection.GetAllOrders().Where(o => o.singer == singer && o.completed == false).ToList();
-            return singerOrdersList;
-        }
+
     }
 }
