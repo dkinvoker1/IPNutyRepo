@@ -115,7 +115,7 @@ namespace IPNuty.Controllers
 
             SheetMusic sheetMusic = SheetMusicCollection.GetAllSheetMusic().Where(e => e.Author == sheetToOrder.Author && e.SheetMusicId == sheetToOrder.SheetMusicId).FirstOrDefault();
 
-            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.Today).SetOrderStatus(false).SetOrderedSheetMusic(sheetMusic).Build();
+            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.UtcNow).SetOrderStatus(false).SetOrderedSheetMusic(sheetMusic).Build();
 
             if (thisSinger == null)
             {

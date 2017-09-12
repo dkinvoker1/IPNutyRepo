@@ -26,7 +26,7 @@ namespace IPNuty.Models.Managers.Singers
 
                 var sheetMusicId = db.SheetsOfMusic.Where(e => e.SheetMusicId == sheetMusic.SheetMusicId && e.Title == sheetMusic.Title).FirstOrDefault();
 
-                Order newOrder = new Order.Builder(thisSinger).SetOrderedSheetMusic(sheetMusicId).SetOrderStatus(false).SetOrderTime(DateTime.Now).Build();
+                Order newOrder = new Order.Builder(thisSinger).SetOrderedSheetMusic(sheetMusicId).SetOrderStatus(false).SetOrderTime(DateTime.Today).Build();
 
                 db.Orders.Add(newOrder);
                 db.SaveChanges();
