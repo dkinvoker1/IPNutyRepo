@@ -202,6 +202,26 @@
     <Compile Include="Migrations\201708291806032_SheetMusicListInSingerHangedToVirtual.Designer.cs">
       <DependentUpon>201708291806032_SheetMusicListInSingerHangedToVirtual.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709112239104_AddBlogUrl.cs" />
+    <Compile Include="Migrations\201709112239104_AddBlogUrl.Designer.cs">
+      <DependentUpon>201709112239104_AddBlogUrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709121033444_AddBlogUrl1.cs" />
+    <Compile Include="Migrations\201709121033444_AddBlogUrl1.Designer.cs">
+      <DependentUpon>201709121033444_AddBlogUrl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709121137118_tabelaOrders.cs" />
+    <Compile Include="Migrations\201709121137118_tabelaOrders.Designer.cs">
+      <DependentUpon>201709121137118_tabelaOrders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709121155190_tabelaOrders1.cs" />
+    <Compile Include="Migrations\201709121155190_tabelaOrders1.Designer.cs">
+      <DependentUpon>201709121155190_tabelaOrders1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709121205538_tabelaOrders2.cs" />
+    <Compile Include="Migrations\201709121205538_tabelaOrders2.Designer.cs">
+      <DependentUpon>201709121205538_tabelaOrders2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\LoginAndRegister\AccountViewModels.cs" />
     <Compile Include="Models\Collections\OrdersCollection.cs" />
@@ -282,6 +302,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708291806032_SheetMusicListInSingerHangedToVirtual.resx">
       <DependentUpon>201708291806032_SheetMusicListInSingerHangedToVirtual.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709112239104_AddBlogUrl.resx">
+      <DependentUpon>201709112239104_AddBlogUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121033444_AddBlogUrl1.resx">
+      <DependentUpon>201709121033444_AddBlogUrl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121137118_tabelaOrders.resx">
+      <DependentUpon>201709121137118_tabelaOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121155190_tabelaOrders1.resx">
+      <DependentUpon>201709121155190_tabelaOrders1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121205538_tabelaOrders2.resx">
+      <DependentUpon>201709121205538_tabelaOrders2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

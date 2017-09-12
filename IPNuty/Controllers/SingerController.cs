@@ -110,10 +110,7 @@ namespace IPNuty.Controllers
             var allSingers = SingersCollection.GetAllSingers();
             Singer thisSinger = allSingers.Where(e => e.Name + e.LastName == userID).FirstOrDefault();
 
-            var type = sheetToOrder.Type.GetHashCode();
-            sheetToOrder = new SheetMusic(sheetToOrder.Title, sheetToOrder.Author, type);
-
-            Order thisOrder = new Order.Builder(thisSinger).SetOrderedSheetMusic(sheetToOrder).SetOrderTime(DateTime.Now).SetOrderStatus(false).Build();
+            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.Now).SetOrderStatus(false).SetOrderedSheetMusic(sheetToOrder).Build();
 
             if (thisSinger == null)
             {

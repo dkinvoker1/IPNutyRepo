@@ -8,10 +8,10 @@ namespace IPNuty.Models
     public class Order
     {
         public int OrderId { get; set; }
-        public Singer singer;
-        public DateTime orderTime;
-        public bool completed;
-        public SheetMusic SheetMusic;
+        public DateTime OrderTime { get; set; }
+        public bool Completed { get; set; }
+        public virtual SheetMusic SheetMusicId { get; set; }
+        public virtual Singer SingerId { get; set; }
 
         public Order()
         {
@@ -19,7 +19,8 @@ namespace IPNuty.Models
 
         public Order(Builder builder)
         {
-            this.singer = builder.singer;
+            this.SingerId = builder.singer;
+            this.SheetMusicId = builder.sheetMusic;
         }
 
         public class Builder
