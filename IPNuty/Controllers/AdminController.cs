@@ -134,11 +134,57 @@ namespace IPNuty.Controllers
                 SheetMusicManager sheetManager = new SheetMusicManager();
                 sheetManager.RemoveSheetMusic(sheet);
                 ModelState.Clear();
-                return View("RemoveSM");
+                allSheets.Remove(sheet);
             }
-            return View("Home"); //z tym działa prawie dobrze
+            return View("SheetMusicListAcctualization", allSheets.ToList());
         }
 
+        public ActionResult Sortuj(string sortOrder)
+        {
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "author_desc" : "";
+            ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
+            ViewBag.TypeSortParm = sortOrder == "Type" ? "type_desc" : "Type";
+
+            ApplicationDbContext dbcontext = new ApplicationDbContext();
+            var sheets = from s in dbcontext.SheetsOfMusic
+                           select s;
+            switch (sortOrder)
+            {
+                case "author_desc":
+                    sheets = sheets.OrderByDescending(s => s.Author);
+                    break;
+                case "Title":
+                    sheets = sheets.OrderBy(s => s.Title);
+                    break;
+                case "title_desc":
+                    sheets = sheets.OrderByDescending(s => s.Title);
+                    break;
+                case "Type":
+                    sheets = sheets.OrderBy(s => s.Type);
+                    break;
+                case "type_desc":
+                    sheets = sheets.OrderByDescending(s => s.Type);
+                    break;
+                default:
+                    sheets = sheets.OrderBy(s => s.Author);
+                    break;
+            }
+            return View("SheetMusicListAcctualization", sheets.ToList());
+        }
+
+        ///// <summary>
+        ///// Usuwanie singera przez admina
+        ///// </summary>
+        ///// <param name="singerToBeDeleted"> Singer który ma być usunięty </param>
+        ///// <returns></returns>
+        //// GET:
+        //[HttpGet]
+        //[Authorize(Roles = "Admin")]
+        //public ActionResult DeleteUser(Singer singerToBeDeleted)
+        //{
+        //    AccountController cont = new AccountController();
+        //    return cont.DeleteUser(singerToBeDeleted);
+        //}
         #endregion
 
 

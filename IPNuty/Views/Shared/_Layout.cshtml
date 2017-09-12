@@ -16,13 +16,16 @@
                 <li><a href="/Admin/SheetMusicListAcctualization/">Baza nut</a></li>
                 <li><a href="/Admin/Order/">Zamówienia</a></li>
             }
-            else
+            else if (Request.IsAuthenticated && User.IsInRole("Singer"))
             {
                 <li><a href="/Account/Login/">Wyloguj</a></li>
                 <li><a href="/Singer/SheetMusicList/">Baza nut</a></li>
                 <li><a href="/Singer/Order/">Zamówienia</a></li>
             }
-            
+            else
+            {
+                <li><a href="/Account/Login/">Zaloguj</a></li>
+            }
         </ul>
     </div>
 

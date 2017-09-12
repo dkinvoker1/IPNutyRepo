@@ -40,6 +40,7 @@ namespace IPNuty.Controllers
         //GET
         [HttpGet]
         [AllowAnonymous]
+        // zmiana statusu z nieposiadane na posiadane
         public ActionResult AddNewSheetMusicToSinger(SheetMusic sheetToAdd)
         {
             string userID = User.Identity.GetUserName();
@@ -62,12 +63,14 @@ namespace IPNuty.Controllers
             SingersCollection.UpdateSinger(thisSinger);
 
             ViewBag.Message = "Dodano nuty jako posiadane!";
-            return View("Home");
+            var allsheets = SheetMusicCollection.GetAllSheetMusic();
+            return View("SheetMusicList", allsheets);
         }
 
         //GET
         [HttpGet]
         [AllowAnonymous]
+        // zmiana statusu nut z posiadanych na nieposiadane
         public ActionResult SubtractSheetMusicFromSinger(SheetMusic sheetToSubtract)
         {
             string userID = User.Identity.GetUserName();
@@ -89,16 +92,16 @@ namespace IPNuty.Controllers
             sheetToSubtract.SingerID = thisSinger;
             var index=thisSinger.SingerSheetMusicList.FindIndex(e=>
                                                                     e.Author==sheetToSubtract.Author &&
-                                                                    e.SheetMusicId==sheetToSubtract.SheetMusicId &&
                                                                     e.SingerID==sheetToSubtract.SingerID &&
                                                                     e.Title==sheetToSubtract.Title &&
                                                                     e.Type==sheetToSubtract.Type
                                                                     );
-            thisSinger.SingerSheetMusicList.RemoveAt(index);
+            thisSinger.SingerSheetMusicList.RemoveAt(index); // błąd - indeks spoza zakresu
             SingersCollection.UpdateSinger(thisSinger);
 
             ViewBag.Message = "Dodano nuty jako posiadane!";
-            return View("Home");
+            var allsheets = SheetMusicCollection.GetAllSheetMusic();
+            return View("SheetMusicList", allsheets);
         }
 
         //GET
@@ -125,6 +128,40 @@ namespace IPNuty.Controllers
                 ViewBag.Message = "Złożono zamówienie na nuty!";
                 return View("Order");
             }
+        }
+
+        public ViewResult Sortuj(string sortOrder, string searchString)
+        {
+            ViewBag.AuthorSortParm = String.IsNullOrEmpty(sortOrder) ? "author_desc" : "";
+            ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
+            ViewBag.TypeSortParm = sortOrder == "Type" ? "type_desc" : "Type";
+            ApplicationDbContext dbcontext = new ApplicationDbContext();
+            var sheets = from s in dbcontext.SheetsOfMusic
+                           select s;
+
+            switch (sortOrder)
+            {
+                case "author_desc":
+                    sheets = sheets.OrderByDescending(s => s.Author);
+                    break;
+                case "Title":
+                    sheets = sheets.OrderBy(s => s.Title);
+                    break;
+                case "title_desc":
+                    sheets = sheets.OrderByDescending(s => s.Title);
+                    break;
+                case "Type":
+                    sheets = sheets.OrderBy(s => s.Type);
+                    break;
+                case "type_desc":
+                    sheets = sheets.OrderByDescending(s => s.Type);
+                    break;
+                default:
+                    sheets = sheets.OrderBy(s => s.Author);
+                    break;
+            }
+
+            return View("SheetMusicList", sheets.ToList());
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿@model IEnumerable<IPNuty.Models.Order>
-@{
+﻿@if (Request.IsAuthenticated && User.IsInRole("Singer"))
+{
+@model IEnumerable<IPNuty.Models.Order>
+{
     ViewBag.Title = "Zamów nuty";
 }
 
@@ -34,3 +36,9 @@
         }*@
     </table>
 </div>
+    }
+
+else
+{
+    <h2>@Html.ActionLink("Zaloguj się, aby mieć dostęp do tej strony.", "Login", "Account")</h2>
+}

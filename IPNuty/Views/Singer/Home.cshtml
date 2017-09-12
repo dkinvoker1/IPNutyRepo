@@ -1,13 +1,20 @@
-﻿@*@model IPNuty.ViewModels.Singers.OrderViewModel*@
-@{
-    ViewBag.Title = "Home";
+﻿@if (Request.IsAuthenticated && User.IsInRole("Singer"))
+{
+    {
+        ViewBag.Title = "Home";
+    }
+
+        <h2>Witaj!</h2>
+        <p>
+            Pamiętaj o tym, aby Twoja lista nut była zawsze aktualna.
+            @Html.ActionLink("Aktualizuj listę posiadanych nut.", "SheetMusicList")
+            <hr />
+            Bądź przygotowany na kolejną próbę.
+            @Html.ActionLink("Zobacz swoje zamówienia.", "Order")
+        </p>
 }
 
-<h2>Witaj!</h2>
-<p>
-    Pamiętaj o tym, aby Twoja lista nut była zawsze aktualna.
-    @Html.ActionLink("Aktualizuj listę posiadanych nut.", "SheetMusicList")
-    <hr />
-    Bądź przygotowany na kolejną próbę.
-    @Html.ActionLink("Zobacz swoje zamówienia.", "Order")
-</p>
+else
+{
+    <h2>@Html.ActionLink("Zaloguj się, aby mieć dostęp do tej strony.", "Login", "Account")</h2>
+}
