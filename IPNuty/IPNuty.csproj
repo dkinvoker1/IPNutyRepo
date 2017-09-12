@@ -210,18 +210,6 @@
     <Compile Include="Migrations\201709121033444_AddBlogUrl1.Designer.cs">
       <DependentUpon>201709121033444_AddBlogUrl1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709121137118_tabelaOrders.cs" />
-    <Compile Include="Migrations\201709121137118_tabelaOrders.Designer.cs">
-      <DependentUpon>201709121137118_tabelaOrders.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709121155190_tabelaOrders1.cs" />
-    <Compile Include="Migrations\201709121155190_tabelaOrders1.Designer.cs">
-      <DependentUpon>201709121155190_tabelaOrders1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709121205538_tabelaOrders2.cs" />
-    <Compile Include="Migrations\201709121205538_tabelaOrders2.Designer.cs">
-      <DependentUpon>201709121205538_tabelaOrders2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\LoginAndRegister\AccountViewModels.cs" />
     <Compile Include="Models\Collections\OrdersCollection.cs" />
@@ -306,15 +294,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709121033444_AddBlogUrl1.resx">
       <DependentUpon>201709121033444_AddBlogUrl1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709121137118_tabelaOrders.resx">
-      <DependentUpon>201709121137118_tabelaOrders.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709121155190_tabelaOrders1.resx">
-      <DependentUpon>201709121155190_tabelaOrders1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709121205538_tabelaOrders2.resx">
-      <DependentUpon>201709121205538_tabelaOrders2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
