@@ -15,9 +15,18 @@ namespace IPNuty.Models.Managers.Singers
 
         public void AddOrder(Order order)
         {
+            var thisOrder = order;
+
             using (var db = new ApplicationDbContext())
             {
-                db.Orders.Add(order);
+                var singer = thisOrder.SingerId;
+                var thisSinger = db.Singers.Where(e => e.SingerId == singer.SingerId && e.Name == singer.Name).FirstOrDefault();
+
+                var sheetMusicId = thisOrder.SheetMusicId;
+
+                Order newOrder = new Order.Builder(thisSinger).SetOrderedSheetMusic(sheetMusicId).SetOrderStatus(false).SetOrderTime(DateTime.Now).Build();
+
+                db.Orders.Add(newOrder);
                 db.SaveChanges();
             } 
                
