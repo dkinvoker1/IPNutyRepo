@@ -113,7 +113,9 @@ namespace IPNuty.Controllers
             var allSingers = SingersCollection.GetAllSingers();
             Singer thisSinger = allSingers.Where(e => e.Name + e.LastName == userID).FirstOrDefault();
 
-            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.Today).SetOrderStatus(false).SetOrderedSheetMusic(sheetToOrder).Build();
+            SheetMusic sheetMusic = SheetMusicCollection.GetAllSheetMusic().Where(e => e.Author == sheetToOrder.Author && e.SheetMusicId == sheetToOrder.SheetMusicId).FirstOrDefault();
+
+            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.Today).SetOrderStatus(false).SetOrderedSheetMusic(sheetMusic).Build();
 
             if (thisSinger == null)
             {

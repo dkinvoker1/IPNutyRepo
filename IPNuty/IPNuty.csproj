@@ -210,6 +210,10 @@
     <Compile Include="Migrations\201709121033444_AddBlogUrl1.Designer.cs">
       <DependentUpon>201709121033444_AddBlogUrl1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709121529503_AddBlogUrl2.cs" />
+    <Compile Include="Migrations\201709121529503_AddBlogUrl2.Designer.cs">
+      <DependentUpon>201709121529503_AddBlogUrl2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\LoginAndRegister\AccountViewModels.cs" />
     <Compile Include="Models\Collections\OrdersCollection.cs" />
@@ -294,6 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709121033444_AddBlogUrl1.resx">
       <DependentUpon>201709121033444_AddBlogUrl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121529503_AddBlogUrl2.resx">
+      <DependentUpon>201709121529503_AddBlogUrl2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
