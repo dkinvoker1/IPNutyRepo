@@ -1,17 +1,18 @@
-﻿@*@model IPNuty.ViewModels.Singers.SheetMusicListAcctualizationViewModel*@
+﻿@if (Request.IsAuthenticated && User.IsInRole("Singer"))
+{
 @model    IEnumerable<IPNuty.Models.SheetMusic>
-@{
+{
     ViewBag.Title = "Baza nut chóru";
 }
 <h2>Twoje posiadane nuty</h2>
 <div>
     <table>
         <tr>
-            <td>Autor</td>
-            <td>Tytuł</td>
-            <td>Rodzaj</td>
-            <td>Czy posiadane</td>
-            <td>Akcja</td>
+            <th>@Html.ActionLink("Autor", "Sortuj", new { sortOrder = ViewBag.AuthorSortParm })</th>
+            <th>@Html.ActionLink("Tytuł", "Sortuj", new { sortOrder = ViewBag.TitleSortParm })</th>
+            <th>@Html.ActionLink("Rodzaj", "Sortuj", new { sortOrder = ViewBag.TypeSortParm })</th>
+            <th>Czy posiadane</th>
+            <th>Akcja</th>
         </tr>
         @{ var sing = Model.Where(e => e.SingerID != null && e.SingerID.Name + e.SingerID.LastName == User.Identity.Name).ToList();}
         @foreach (var item in Model.Where(e=>e.SingerID==null))
@@ -27,12 +28,12 @@
                 @if (cos.Count>0)
                 {
                     <td>Tak</td>
-                    <td>Usuń nuty/Zamów nuty/@Html.ActionLink("Nie posiadane", "SubtractSheetMusicFromSinger", item)</td>
+                    <td>@Html.ActionLink("Oznacz jako nieposiadane", "SubtractSheetMusicFromSinger", item)</td>
                 }
                 else
                 {
                     <td>Nie</td>
-                    <td>Usuń nuty/@Html.ActionLink("Zamów nuty", "OrderSheetMusic", item)/@Html.ActionLink("Posiadane", "AddNewSheetMusicToSinger", item)</td>
+                    <td>@Html.ActionLink("Zamów nuty", "OrderSheetMusic", item)/@Html.ActionLink("Oznacz jako posiadane", "AddNewSheetMusicToSinger", item)</td>
                 }
                 
             </tr>
@@ -40,4 +41,9 @@
     </table>
     <h2>Jeśli nuty są posiadane to można je usunąć z listy, jeśli są nie w posiadaniu to można je zamówić - wtedy trafiają na listę zamówień</h2>
 </div>
+}
 
+else
+{
+    <h2>@Html.ActionLink("Zaloguj się, aby mieć dostęp do tej strony.", "Login", "Account")</h2>
+}

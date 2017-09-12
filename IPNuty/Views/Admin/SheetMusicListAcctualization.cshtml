@@ -15,18 +15,20 @@
 <div>
     <table>
         <tr>
-            <td>Autor</td>
-            <td>Tytuł</td>
-            <td>Rodzaj</td>
-            <td>Akcja</td>
+            <th>@Html.ActionLink("Autor", "Sortuj", new { sortOrder = ViewBag.AuthorSortParm })</th>
+            <th>@Html.ActionLink("Tytuł", "Sortuj", new { sortOrder = ViewBag.TitleSortParm })</th>
+            <th>@Html.ActionLink("Rodzaj", "Sortuj", new { sortOrder = ViewBag.TypeSortParm })</th>
+            <th>Akcja</th>
+
         </tr>
-        @foreach (var item in Model)
+        
+        @foreach (var item in Model.Where(e => e.SingerID == null))
         {
             <tr>
                 <td>@item.Author</td>
                 <td>@item.Title</td>
                 <td>@item.Type</td>
-                <td>@Html.ActionLink("Usuń", "RemoveSheetMusic",item)</td>
+                <td>Html.ActionLink("Usuń nuty", "RemoveSheetMusic","Account",item,null)</td>
             </tr>
         }
     </table>

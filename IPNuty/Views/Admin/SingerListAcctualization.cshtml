@@ -42,7 +42,8 @@
                     {
                         <td><a href='@Url.Action("ChangeSingerActivicity", "AdminController" , new { SingerId =item.SingerId})'>Nieaktywny<a /></td>
                     }
-                    <td><button>Usuń członka</button></td>
+                    <td>@Html.ActionLink("Usuń członka", "DeleteUser", item)</td>
+                    @*<td><button>Usuń członka</button></td>*@
                     @*<td><input type="button" value="Przeglądaj" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization", "Admin", new { Name = item.Name, LastName = item.LastName, Activicity = item.Activicity, JoiningDate = item.JoiningDate, SingerSheetMusicList = item.SingerSheetMusicList })'" /></td>*@
                     <td><input type="button" value="Przeglądaj" onclick="location.href='@Url.Action("SingersSheetMusicListAcctualization")?@item'" /></td>
 

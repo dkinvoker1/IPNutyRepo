@@ -36,6 +36,11 @@ namespace IPNuty.Controllers
         {
             get
             {
+                //if(_userManager==null)
+                //{
+                //    _userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                //}
+                //return _userManager;
                 return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
 
@@ -143,7 +148,29 @@ namespace IPNuty.Controllers
             return View("Index");
         }
 
+        /// <summary>
+        /// Usuwanie singera przez admina
+        /// </summary>
+        /// <param name="singerToBeDeleted"> Singer który ma być usunięty </param>
+        /// <returns></returns>
+        // GET:
 
+        [Authorize(Roles = "Admin")]
+        public ActionResult DeleteUser(Singer singerToBeDeleted)
+        {
+            //pobranie identity singera (hasła, role, logint)
+            var identitySinger=UserManager.Users.Where(e => e.SingerId == singerToBeDeleted).FirstOrDefault();
+            //usunięcie wszystkich nut singera
+            SheetMusicManager musicManager = new SheetMusicManager();
+            musicManager.RemoveSheetMusic(singerToBeDeleted);
+            //tutaj to samo co wyżej ale dla orderów jak Ola zrobi
+            //====================================================
+
+            //====================================================
+            UserManager.RemoveFromRole(identitySinger.Id, "Singer");
+            UserManager.Delete(identitySinger);
+            return View("Index");
+        }
 
         private IAuthenticationManager AuthenticationManager
         {

@@ -20,13 +20,34 @@ namespace IPNuty.Models.Managers.Admin
             }
 
         }
-
-        public void RemoveSheetMusic(SheetMusic sheetMusic) //admin usuwa nuty z bazy
+        /// <summary>
+        /// admin usuwa nuty z bazy (i wszystkie ich wystąpienia u singerów)
+        /// </summary>
+        /// <param name="sheetMusic"> nuty do usunięcia</param>
+        public void RemoveSheetMusic(SheetMusic sheetMusic)
         {
             using (var db = new ApplicationDbContext())
             {
-                var del=db.SheetsOfMusic.Where(e => e.SheetMusicId == sheetMusic.SheetMusicId).FirstOrDefault();
-                db.SheetsOfMusic.Remove(del);
+                //var del=db.SheetsOfMusic.Where(e => e.SheetMusicId == sheetMusic.SheetMusicId).FirstOrDefault();
+                var del = db.SheetsOfMusic.Where(e => e.Author == sheetMusic.Author && e.Title == sheetMusic.Title && e.Type == sheetMusic.Type);
+                //db.SheetsOfMusic.Remove(del);
+                db.SheetsOfMusic.RemoveRange(del);
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// Usuwanie wszystkich nut danego singera
+        /// </summary>
+        /// <param name="singer"> Singer którego nuty trzeba usunąć</param>
+        public void RemoveSheetMusic(Singer singer)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                //var del=db.SheetsOfMusic.Where(e => e.SheetMusicId == sheetMusic.SheetMusicId).FirstOrDefault();
+                var del = db.SheetsOfMusic.Where(e => e.SingerID==singer);
+                if(del.Count()>0)
+                db.SheetsOfMusic.RemoveRange(del);
                 db.SaveChanges();
             }
         }
