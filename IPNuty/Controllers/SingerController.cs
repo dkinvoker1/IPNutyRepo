@@ -120,7 +120,7 @@ namespace IPNuty.Controllers
             if (thisSinger == null)
             {
                 ViewBag.Message = "Musisz być zalogowany aby zamówić nuty!";
-                return View("Order");
+                return View("Order", OrdersCollection.GetAllSingerOrders(thisSinger));
             }
             else
             {
@@ -128,7 +128,7 @@ namespace IPNuty.Controllers
                 orderManager.AddOrder(thisOrder);
 
                 ViewBag.Message = "Złożono zamówienie na nuty!";
-                return View("Order");
+                return View("Order", OrdersCollection.GetAllSingerOrders(thisSinger));
             }
         }
 
