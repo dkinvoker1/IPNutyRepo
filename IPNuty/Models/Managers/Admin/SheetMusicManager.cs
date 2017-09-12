@@ -45,9 +45,10 @@ namespace IPNuty.Models.Managers.Admin
             using (var db = new ApplicationDbContext())
             {
                 //var del=db.SheetsOfMusic.Where(e => e.SheetMusicId == sheetMusic.SheetMusicId).FirstOrDefault();
-                var del = db.SheetsOfMusic.Where(e => e.SingerID==singer);
-                if(del.Count()>0)
-                db.SheetsOfMusic.RemoveRange(del);
+                var dell = db.SheetsOfMusic.ToList();
+                var del = dell.Where(e => e.SingerID!=null && e.SingerID.SingerId.Equals(singer.SingerId));
+                if (del.Count() > 0)
+                    db.SheetsOfMusic.RemoveRange(del);
                 db.SaveChanges();
             }
         }

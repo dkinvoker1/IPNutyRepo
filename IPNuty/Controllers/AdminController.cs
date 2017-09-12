@@ -203,18 +203,26 @@ namespace IPNuty.Controllers
             //var UserContext = new ApplicationDbContext();
             //var users = UserContext.Users.ToList();
             var identitySingers = UserManager.Users.ToArray();
-            var identitySinger = identitySingers.Where(e => e.SingerId == singerToBeDeleted).FirstOrDefault();
-            //usunięcie wszystkich nut singera
-            SheetMusicManager musicManager = new SheetMusicManager();
-            musicManager.RemoveSheetMusic(singerToBeDeleted);
+            var identitySinger = identitySingers.Where(e => e.UserName == singerToBeDeleted.Name+singerToBeDeleted.LastName).FirstOrDefault();
+                      
             //tutaj to samo co wyżej ale dla orderów jak Ola zrobi
             //====================================================
 
             //====================================================
-            UserManager.RemoveFromRole(identitySinger.Id, "Singer");
-            UserManager.Delete(identitySinger);
-            //return View("Index");
-            return new EmptyResult();
+            //usunięcie wszystkich nut singera
+            SheetMusicManager musicManager = new SheetMusicManager();
+            musicManager.RemoveSheetMusic(singerToBeDeleted);
+
+            if (identitySinger != null)
+            {
+                UserManager.RemoveFromRole(identitySinger.Id, "Singer");
+                UserManager.Delete(identitySinger);
+            }
+            SingersManager singerManager = new SingersManager();
+            singerManager.RemoveSinger(singerToBeDeleted);
+
+            var allSingers = SingersCollection.GetAllSingers();
+            return View("SingerListAcctualization", allSingers.ToList());
         }
         #endregion
 

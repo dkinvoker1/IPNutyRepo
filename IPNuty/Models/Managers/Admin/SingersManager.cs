@@ -34,8 +34,12 @@ namespace IPNuty.Models.Managers.Admin
         {
             using (var db = new ApplicationDbContext())
             {
-                db.Singers.Remove(singer);
-                db.SaveChanges();
+                singer = db.Singers.Where(e => e.SingerId == singer.SingerId).FirstOrDefault();
+                if (singer != null)
+                {
+                    db.Singers.Remove(singer);
+                    db.SaveChanges();
+                }
             }
         }
 
