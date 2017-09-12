@@ -12,7 +12,6 @@ namespace IPNuty.ViewModels.Singers
     public class OrderViewModel
     {
         public Singer singer;
-        public List<SheetMusic> allSheetMusicList = SheetMusicCollection.GetAllSheetMusic();
-        public Order order;
+        public List<Order> allOrdersList = OrdersCollection.GetAllOrders();
     }
 }

@@ -1,6 +1,6 @@
 ﻿@if (Request.IsAuthenticated && User.IsInRole("Singer"))
 {
-@model IEnumerable<IPNuty.Models.Order>
+@model  IEnumerable<IPNuty.Models.Order>
     {
         ViewBag.Title = "Zamów nuty";
     }
@@ -16,21 +16,26 @@
         <tr>
             <td>Data złożenia zamówienia</td>
             <td>Realizacja</td>
-            <td>Id</td>
-            <td>Anuluj</td>
+            <td>Numer zamówienia</td>
+            <td>Akcja</td>
         </tr>
 
-        @{ var orders = Model.Where(e => e.SingerId != null && e.SingerId.Name + e.SingerId.LastName == User.Identity.Name).ToList();}
-        @{ var singerId = orders[0].SingerId.SingerId;
-        }
-
-        @foreach (var item in Model.Where(e => e.SingerId.SingerId == singerId))
+        @*@foreach (var item in Model.Where(e => e.SingerId.Name + e.SingerId.LastName == User.Identity.Name).ToList())*@
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@item.OrderTime</td>
-                <td>@item.Completed</td>
+                @if (item.Completed == true)
+                {
+                    <td>Zamówienie gotowe do odbioru</td>
+                }
+                else
+                {
+                    <td>Oczekiwanie na realizację</td>
+                }
                 <td>@item.OrderId</td>
-                <td>Anuluj zamówienie</td>
+                @*<td>@Html.ActionLink("Anuluj zamówienie", "RemoveSingerOrder", item)</td>*@
+                <td>Anuluj</td>
 
             </tr>
         }

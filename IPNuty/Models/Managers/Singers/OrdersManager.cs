@@ -34,5 +34,20 @@ namespace IPNuty.Models.Managers.Singers
                
         }
 
+        public void RemoveOrder(Order order)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                order = db.Orders.Where(e => e.SingerId == order.SingerId).FirstOrDefault();
+                if (order != null)
+                {
+                    db.Orders.Remove(order);
+                    db.SaveChanges();
+                }
+            }
+
+
+        }
+
     }
 }

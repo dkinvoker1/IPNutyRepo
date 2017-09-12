@@ -26,7 +26,7 @@ namespace IPNuty.Controllers
         public ActionResult Order()
         {
             var orderViewModel = new OrderViewModel();
-            return View(orderViewModel.order);
+            return View(orderViewModel.allOrdersList);
         }
 
         //
@@ -107,6 +107,7 @@ namespace IPNuty.Controllers
         //GET
         [HttpGet]
         [AllowAnonymous]
+        // zamawianie nut
         public ActionResult OrderSheetMusic(SheetMusic sheetToOrder)
         {
             string userID = User.Identity.GetUserName();
@@ -131,6 +132,36 @@ namespace IPNuty.Controllers
                 return View("Order", OrdersCollection.GetAllSingerOrders(thisSinger));
             }
         }
+
+        //GET
+        [HttpGet]
+        [AllowAnonymous]
+        // anulowanie zamówienia
+        public ActionResult RemoveSingerOrder(Order order)
+        {
+            string userID = User.Identity.GetUserName();
+            var allSingers = SingersCollection.GetAllSingers();
+            Singer thisSinger = allSingers.Where(e => e.Name + e.LastName == userID).FirstOrDefault();
+
+            SheetMusic sheetMusic = SheetMusicCollection.GetAllSheetMusic().Where(e => e.Author == order.SheetMusicId.Author && e.SheetMusicId == order.SheetMusicId.SheetMusicId).FirstOrDefault();
+
+            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.UtcNow).SetOrderStatus(false).SetOrderedSheetMusic(sheetMusic).Build();
+
+            if (thisSinger == null)
+            {
+                ViewBag.Message = "Musisz być zalogowany aby zamówić nuty!";
+                return View("Order", OrdersCollection.GetAllSingerOrders(thisSinger));
+            }
+            else
+            {
+                OrdersManager orderManager = new OrdersManager();
+                orderManager.RemoveOrder(thisOrder);
+
+                ViewBag.Message = "Złożono zamówienie na nuty!";
+                return View("Order", OrdersCollection.GetAllSingerOrders(thisSinger));
+            }
+        }
+
 
         public ViewResult Sortuj(string sortOrder, string searchString)
         {
