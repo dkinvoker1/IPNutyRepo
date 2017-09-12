@@ -15,6 +15,8 @@
             <th>Akcja</th>
         </tr>
         @{ var sing = Model.Where(e => e.SingerID != null && e.SingerID.Name + e.SingerID.LastName == User.Identity.Name).ToList();}
+
+
         @foreach (var item in Model.Where(e=>e.SingerID==null))
          {
             <tr>

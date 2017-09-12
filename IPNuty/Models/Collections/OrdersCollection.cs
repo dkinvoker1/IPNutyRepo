@@ -19,8 +19,12 @@ namespace IPNuty.Models.Collections
 
         public static List<Order> GetAllSingerOrders(Singer singer)
         {
-            List<Order> singerOrdersList = OrdersCollection.GetAllOrders().Where(o => o.SingerId == singer && o.Completed == false).ToList();
-            return singerOrdersList;
+            using (ApplicationDbContext dbcontext = new ApplicationDbContext())
+            {
+                List<Order> AllOrdersList = dbcontext.Orders.ToList();
+                List<Order> singerOrdersList = AllOrdersList.Where(o => o.SingerId.SingerId == singer.SingerId && o.Completed == false).ToList();
+                return singerOrdersList;
+            }
         }
 
     }

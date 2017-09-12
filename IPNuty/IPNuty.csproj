@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201709121529503_AddBlogUrl2.Designer.cs">
       <DependentUpon>201709121529503_AddBlogUrl2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709121823317_Orderd_foreignKeys.cs" />
+    <Compile Include="Migrations\201709121823317_Orderd_foreignKeys.Designer.cs">
+      <DependentUpon>201709121823317_Orderd_foreignKeys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\LoginAndRegister\AccountViewModels.cs" />
     <Compile Include="Models\Collections\OrdersCollection.cs" />
@@ -301,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709121529503_AddBlogUrl2.resx">
       <DependentUpon>201709121529503_AddBlogUrl2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121823317_Orderd_foreignKeys.resx">
+      <DependentUpon>201709121823317_Orderd_foreignKeys.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
