@@ -38,16 +38,16 @@ namespace IPNuty.Models.Managers.Singers
         {
             using (var db = new ApplicationDbContext())
             {
-                order = db.Orders.Where(e => e.SingerId == order.SingerId).FirstOrDefault();
+                order = db.Orders.Where(e => e.OrderId == order.OrderId).FirstOrDefault();
                 if (order != null)
                 {
                     db.Orders.Remove(order);
                     db.SaveChanges();
                 }
             }
-
-
         }
 
+
     }
-}
+
+    }

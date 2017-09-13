@@ -23,8 +23,12 @@ namespace IPNuty.Models.Managers.Admin
         {
             using (var db = new ApplicationDbContext())
             {
-                db.Orders.Remove(order);
-                db.SaveChanges();
+                order = db.Orders.Where(e => e.OrderId == order.OrderId).FirstOrDefault();
+                if (order != null)
+                {
+                    db.Orders.Remove(order);
+                    db.SaveChanges();
+                }
             }
         }
 

@@ -14,9 +14,11 @@
 <div>
     <table>
         <tr>
+            <td>Numer zamówienia</td>
+            <td>Tytuł</td>
+            <td>Autor</td>
             <td>Data złożenia zamówienia</td>
             <td>Realizacja</td>
-            <td>Numer zamówienia</td>
             <td>Akcja</td>
         </tr>
 
@@ -26,6 +28,9 @@
         foreach (var item in Model.Where(e => e.SingerId.Name + e.SingerId.LastName == User.Identity.Name).ToList())
         {
             <tr>
+                <td>@item.OrderId</td>
+                <td>@item.SheetMusicId.Title</td>
+                <td>@item.SheetMusicId.Author</td>
                 <td>@item.OrderTime</td>
                 @if (item.Completed == true)
                 {
@@ -35,9 +40,9 @@
                 {
                     <td>Oczekiwanie na realizację</td>
                 }
-                <td>@item.OrderId</td>
-                @*<td>@Html.ActionLink("Anuluj zamówienie", "RemoveSingerOrder", item)</td>*@
-                <td>Anuluj</td>
+
+                <td>@Html.ActionLink("Anuluj zamówienie", "RemoveSingerOrder", item)</td>
+
 
             </tr>
         }

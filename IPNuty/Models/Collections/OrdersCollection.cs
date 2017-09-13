@@ -45,7 +45,7 @@ namespace IPNuty.Models.Collections
         {
             using (ApplicationDbContext dbcontext = new ApplicationDbContext())
             {
-                List<Order> AllOrdersList = dbcontext.Orders.ToList();
+                List<Order> AllOrdersList = OrdersCollection.GetAllOrders();
                 List<Order> singerOrdersList = AllOrdersList.Where(o => o.SingerId.SingerId == singer.SingerId && o.Completed == false).ToList();
                 return singerOrdersList;
             }

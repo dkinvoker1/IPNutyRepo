@@ -116,7 +116,7 @@ namespace IPNuty.Controllers
 
             SheetMusic sheetMusic = SheetMusicCollection.GetAllSheetMusic().Where(e => e.Author == sheetToOrder.Author && e.SheetMusicId == sheetToOrder.SheetMusicId).FirstOrDefault();
 
-            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.UtcNow).SetOrderStatus(false).SetOrderedSheetMusic(sheetMusic).Build();
+            var thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.UtcNow).SetOrderStatus(false).SetOrderedSheetMusic(sheetMusic).Build();
 
             if (thisSinger == null)
             {
@@ -143,9 +143,7 @@ namespace IPNuty.Controllers
             var allSingers = SingersCollection.GetAllSingers();
             Singer thisSinger = allSingers.Where(e => e.Name + e.LastName == userID).FirstOrDefault();
 
-            SheetMusic sheetMusic = SheetMusicCollection.GetAllSheetMusic().Where(e => e.Author == order.SheetMusicId.Author && e.SheetMusicId == order.SheetMusicId.SheetMusicId).FirstOrDefault();
 
-            Order thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.UtcNow).SetOrderStatus(false).SetOrderedSheetMusic(sheetMusic).Build();
 
             if (thisSinger == null)
             {
@@ -155,9 +153,9 @@ namespace IPNuty.Controllers
             else
             {
                 OrdersManager orderManager = new OrdersManager();
-                orderManager.RemoveOrder(thisOrder);
+                orderManager.RemoveOrder(order);
 
-                ViewBag.Message = "Złożono zamówienie na nuty!";
+                ViewBag.Message = "Usunięto zamówienie!";
                 return View("Order", OrdersCollection.GetAllSingerOrders(thisSinger));
             }
         }
