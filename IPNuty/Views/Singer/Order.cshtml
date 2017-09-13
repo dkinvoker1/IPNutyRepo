@@ -20,8 +20,10 @@
             <td>Akcja</td>
         </tr>
 
-        @*@foreach (var item in Model.Where(e => e.SingerId.Name + e.SingerId.LastName == User.Identity.Name).ToList())*@
-        @foreach (var item in Model)
+        @{ var singerModel = Model.Where(e => e.SingerId.Name + e.SingerId.LastName == User.Identity.Name).ToList();}
+        @if (singerModel != null)
+        {
+        foreach (var item in Model.Where(e => e.SingerId.Name + e.SingerId.LastName == User.Identity.Name).ToList())
         {
             <tr>
                 <td>@item.OrderTime</td>
@@ -38,6 +40,7 @@
                 <td>Anuluj</td>
 
             </tr>
+        }
         }
     </table>
 </div>

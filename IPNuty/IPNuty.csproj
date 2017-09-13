@@ -218,6 +218,10 @@
     <Compile Include="Migrations\201709121823317_Orderd_foreignKeys.Designer.cs">
       <DependentUpon>201709121823317_Orderd_foreignKeys.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709131331174_Ordery.cs" />
+    <Compile Include="Migrations\201709131331174_Ordery.Designer.cs">
+      <DependentUpon>201709131331174_Ordery.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\LoginAndRegister\AccountViewModels.cs" />
     <Compile Include="Models\Collections\OrdersCollection.cs" />
@@ -308,6 +312,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709121823317_Orderd_foreignKeys.resx">
       <DependentUpon>201709121823317_Orderd_foreignKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709131331174_Ordery.resx">
+      <DependentUpon>201709131331174_Ordery.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
