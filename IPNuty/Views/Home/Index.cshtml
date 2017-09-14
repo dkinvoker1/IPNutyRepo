@@ -7,14 +7,10 @@
 {
     using (Html.BeginForm("Login", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-        //nie działa wylogowanie zalogowanego użytkownika - trzeba dodać ponownie taką funkcjonalność 
-        //(poszukać starego wylogowania w kodzie i to naprawić)
         @Html.AntiForgeryToken()
         <p><h2>Witaj  @User.Identity.GetUserName()</h2> </p>
         <ul class="nav navbar-nav navbar-right">
-            @*to jest ta linijka powodujaca bugi!*@
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
-            <li>@Html.ActionLink("Wyloguj się", "LogOff")</li>
+            <li><a href="/Account/Login/">Wyloguj się</a></li>
         </ul>
     }
 }

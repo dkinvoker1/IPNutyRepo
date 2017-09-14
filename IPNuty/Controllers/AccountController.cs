@@ -51,6 +51,12 @@ namespace IPNuty.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if(this.HttpContext.User!=null && this.HttpContext.User.Identity!=null && this.HttpContext.User.Identity.IsAuthenticated)
+            {
+                AuthenticationManager.SignOut();
+                Session.Abandon();
+                return RedirectToAction("Index", "Home");
+            }
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -123,32 +129,12 @@ namespace IPNuty.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            AuthenticationManager.SignOut();
-            return RedirectToAction("Index", "Home");
-        }
-
-
-        // GET:
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult LogOff2()
-        {
-            AuthenticationManager.SignOut();
-            return View("Index");
-        }
-
         ///// <summary>
         ///// Usuwanie singera przez admina
         ///// </summary>
         ///// <param name="singerToBeDeleted"> Singer który ma być usunięty </param>
         ///// <returns></returns>
-        
+
         //[HttpGet]
         //[Authorize(Roles = "Admin")]
         //public ActionResult DeleteUser(Singer singerToBeDeleted)
@@ -166,6 +152,17 @@ namespace IPNuty.Controllers
         //    UserManager.Delete(identitySinger);
         //    //return View("Index");
         //    return new EmptyResult();
+        //}
+
+        //z jakiegoś powodu nie działało, przeniesione do loginu
+        // POST: /Account/LogOff
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult LogOff()
+        //{
+        //    AuthenticationManager.SignOut();
+        //    Session.Abandon();
+        //    return RedirectToAction("Index", "Home");
         //}
 
         private IAuthenticationManager AuthenticationManager
