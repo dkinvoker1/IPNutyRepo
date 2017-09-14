@@ -344,6 +344,103 @@ namespace IPNuty.Controllers
         }
         #endregion
 
+        public ViewResult SortujSinger(string sortOrder, string searchString)
+        {
+            ViewBag.SurnameSortParm = String.IsNullOrEmpty(sortOrder) ? "surname_desc" : "";
+            ViewBag.NameSortParm = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
+            ApplicationDbContext dbcontext = new ApplicationDbContext();
+            var singers = from s in dbcontext.Singers
+                         select s;
 
+            switch (sortOrder)
+            {
+                case "surname_desc":
+                    singers = singers.OrderByDescending(s => s.LastName);
+                    break;
+                case "Name":
+                    singers = singers.OrderBy(s => s.Name);
+                    break;
+                case "name_desc":
+                    singers = singers.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    singers = singers.OrderBy(s => s.JoiningDate);
+                    break;
+                case "date_desc":
+                    singers = singers.OrderByDescending(s => s.JoiningDate);
+                    break;
+                case "Status":
+                    singers = singers.OrderBy(s => s.Activicity);
+                    break;
+                case "status_desc":
+                    singers = singers.OrderByDescending(s => s.Activicity);
+                    break;
+                default:
+                    singers = singers.OrderBy(s => s.LastName);
+                    break;
+            }
+
+            return View("SingerListAcctualization", singers.ToList());
+        }
+
+        public ViewResult SortujOrder(string sortOrder, string searchString)
+        {
+            ViewBag.StatusSortParm = String.IsNullOrEmpty(sortOrder) ? "status_desc" : "";
+            ViewBag.IDSortParm = sortOrder == "ID" ? "ID_desc" : "ID";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.SurnameSortParm = sortOrder == "Surname" ? "surname_desc" : "Surname";
+            ViewBag.AuthorSortParm = sortOrder == "Author" ? "author_desc" : "Author";
+            ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
+
+
+            ApplicationDbContext dbcontext = new ApplicationDbContext();
+            var orders = from s in dbcontext.Orders
+                          select s;
+
+            switch (sortOrder)
+            {
+                case "status_desc":
+                    orders = orders.OrderBy(s => s.Completed);
+                    break;
+
+                case "ID":
+                    orders = orders.OrderBy(s => s.OrderId);
+                    break;
+                case "ID_desc":
+                    orders = orders.OrderByDescending(s => s.OrderId);
+                    break;
+                case "Date":
+                    orders = orders.OrderBy(s => s.OrderTime);
+                    break;
+                case "date_desc":
+                    orders = orders.OrderByDescending(s => s.OrderTime);
+                    break;
+                case "Surname":
+                    orders = orders.OrderBy(s => s.SingerId.LastName);
+                    break;
+                case "surname_desc":
+                    orders = orders.OrderByDescending(s => s.SingerId.LastName);
+                    break;
+                case "Author":
+                    orders = orders.OrderBy(s => s.SheetMusicId.Author);
+                    break;
+                case "author_desc":
+                    orders = orders.OrderByDescending(s => s.SheetMusicId.Author);
+                    break;
+                case "Title":
+                    orders = orders.OrderBy(s => s.SheetMusicId.Title);
+                    break;
+                case "title_desc":
+                    orders = orders.OrderByDescending(s => s.SheetMusicId.Title);
+                    break;
+                default:
+                    orders = orders.OrderByDescending(s => s.Completed);
+                    break;
+            }
+
+            return View("Order", orders.ToList());
+        }
     }
 }

@@ -14,12 +14,12 @@
 <div>
     <table>
         <tr>
-            <td>Numer zamówienia</td>
-            <td>Tytuł</td>
-            <td>Autor</td>
-            <td>Data złożenia zamówienia</td>
-            <td>Realizacja</td>
-            <td>Akcja</td>
+            <th>Numer zamówienia</th>
+            <th>@Html.ActionLink("Tytuł", "SortujOrder", new { sortOrder = ViewBag.TitleSortParm })</th>
+            <th>@Html.ActionLink("Autor", "SortujOrder", new { sortOrder = ViewBag.AuthorSortParm })</th>
+            <th>Data złożenia zamówienia</th>
+            <th>@Html.ActionLink("Realizacja", "SortujOrder", new { sortOrder = ViewBag.StatusSortParm })</th>
+            <th>Akcja</th>
         </tr>
 
         @{ var singerModel = Model.Where(e => e.SingerId.Name + e.SingerId.LastName == User.Identity.Name).ToList();}
@@ -31,7 +31,7 @@
                 <td>@item.OrderId</td>
                 <td>@item.SheetMusicId.Title</td>
                 <td>@item.SheetMusicId.Author</td>
-                <td>@item.OrderTime</td>
+                <td>@item.OrderTime.ToShortDateString()</td>
                 @if (item.Completed == true)
                 {
                     <td>Zamówienie gotowe do odbioru</td>

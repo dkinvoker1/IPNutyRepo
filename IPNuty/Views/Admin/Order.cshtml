@@ -13,12 +13,12 @@
         <p>Pamiętaj, aby przy wręczeniu nut chórzyście usunąć zamówienie z listy!</p>
         <table>
             <tr>
-                <td>Numer zamówienia</td>
-                <td>Zamawiający</td>
-                <td>Data złożenia zamówienia</td>
-                <td>Status zamówienia</td>
-                <td>Nuty</td>
-                <td>Usuń (gdy przekazano nuty lub gdy chcesz anulować zamówienie)</td>
+                <th>@Html.ActionLink("Numer zamówienia", "SortujOrder", new { sortOrder = ViewBag.IDSortParm })</th>
+                <th>@Html.ActionLink("Zamawiający", "SortujOrder", new { sortOrder = ViewBag.SurnameSortParm })</th>
+                <th>@Html.ActionLink("Data złożenia zamówienia", "SortujOrder", new { sortOrder = ViewBag.DateSortParm })</th>
+                <th>@Html.ActionLink("Status zamówienia", "SortujOrder", new { sortOrder = ViewBag.StatusSortParm })</th>
+                <th>@Html.ActionLink("Nuty", "SortujOrder", new { sortOrder = ViewBag.AuthorSortParm })</th>
+                <th>Usuń</th>
             </tr>
             @foreach (var item in Model)
             {
@@ -26,7 +26,7 @@
                 {
                         <tr>
                             <td>@item.OrderId</td>
-                            <td>@item.SingerId.Name @item.SingerId.LastName</td>
+                            <td>@item.SingerId.LastName @item.SingerId.Name </td>
                             <td>@item.OrderTime.ToShortDateString()</td>
                             @if(@item.Completed)
                             {
@@ -58,13 +58,13 @@
 
 <div>
 
-    <h2>Podsumowanie - co skserować na następną próbę</h2>
+    <h2>Podsumowanie</h2>
     <table>
         <tr>
-            <td>Autor</td>
-            <td>Tytuł</td>
-            <td>Akcja</td>
-            <td>Zamówiona ilość</td>
+            <th>Autor</th>
+            <th>Tytuł</th>
+            <th>Akcja</th>
+            <th>Zamówiona ilość</th>
         </tr>
         @* Kolejne wiersze to wartości z listy (po zaznaczeniu checkboxów). Dostępne egzemplarze pobierane są z bazy, Potrzebna ilość to różnica między nimi *@
         

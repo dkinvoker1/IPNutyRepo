@@ -194,5 +194,40 @@ namespace IPNuty.Controllers
 
             return View("SheetMusicList", sheets.ToList());
         }
+
+
+        public ViewResult SortujOrder(string sortOrder, string searchString)
+        {
+            ViewBag.AuthorSortParm = String.IsNullOrEmpty(sortOrder) ? "author_desc" : "";
+            ViewBag.TitleSortParm = sortOrder == "Title" ? "title_desc" : "Title";
+            ViewBag.StatusSortParm = sortOrder == "Status" ? "status_desc" : "Status";
+            ApplicationDbContext dbcontext = new ApplicationDbContext();
+            var sheets = from s in dbcontext.Orders
+                         select s;
+
+            switch (sortOrder)
+            {
+                case "author_desc":
+                    sheets = sheets.OrderByDescending(s => s.SheetMusicId.Author);
+                    break;
+                case "Title":
+                    sheets = sheets.OrderBy(s => s.SheetMusicId.Title);
+                    break;
+                case "title_desc":
+                    sheets = sheets.OrderByDescending(s => s.SheetMusicId.Title);
+                    break;
+                case "Status":
+                    sheets = sheets.OrderBy(s => s.Completed);
+                    break;
+                case "status_desc":
+                    sheets = sheets.OrderByDescending(s => s.Completed);
+                    break;
+                default:
+                    sheets = sheets.OrderBy(s => s.SheetMusicId.Author);
+                    break;
+            }
+
+            return View("Order", sheets.ToList());
+        }
     }
 }

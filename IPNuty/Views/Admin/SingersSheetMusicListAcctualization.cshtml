@@ -17,7 +17,26 @@
 
         <div>
 
-            @Html.Partial("_SingersSheetMusicListAcctualization")
+
+            <table>
+                <tr>
+                    <th>@Html.ActionLink("Autor", "Sortuj", new { sortOrder = ViewBag.AuthorSortParm })</th>
+                    <th>@Html.ActionLink("Tytuł", "Sortuj", new { sortOrder = ViewBag.TitleSortParm })</th>
+                    <th>@Html.ActionLink("Rodzaj", "Sortuj", new { sortOrder = ViewBag.TypeSortParm })</th>
+                    <th>Akcja</th>
+
+                </tr>
+
+                @foreach (var item in Model.Where(e => e.SingerID == null))
+                {
+                    <tr>
+                        <td>@item.Author</td>
+                        <td>@item.Title</td>
+                        <td>@item.Type</td>
+                        <td>@Html.ActionLink("Usuń nuty", "RemoveSheetMusic", item)</td>
+                    </tr>
+                }
+            </table>
 
         </div>
 

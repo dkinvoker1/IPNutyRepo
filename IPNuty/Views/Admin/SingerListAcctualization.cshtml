@@ -7,25 +7,21 @@
     }
 
     <h2>Aktualizuj listę chórzystów</h2>
-    <p> Odnośnik do jego listy posiadanych nut</p>
     <hr />
 
     <div>
         @Html.ActionLink("Dodaj nowego członka chóru", "Register", "Account")
-
-        @*<input type="button" value="Dodaj nowego członka" onclick="location.href='@Url.Action("AddNewSinger")'" />*@
-        @*Najpierw podajemy widok, potem ew. folder*@
     </div>
 
     <div>
         <table>
             <tr>
-                <td>Imię</td>
-                <td>Nazwisko</td>
-                <td>Członek od:</td>
-                <td>Aktywność</td>
-                <td>Usuń</td>
-                <td>Posiadane nuty</td>
+                <th>@Html.ActionLink("Imię", "SortujSinger", new { sortOrder = ViewBag.NameSortParm })</th>
+                <th>@Html.ActionLink("Nazwisko", "SortujSinger", new { sortOrder = ViewBag.SurnameSortParm })</th>
+                <th>@Html.ActionLink("Data dołączenia", "SortujSinger", new { sortOrder = ViewBag.DateSortParm })</th>
+                <th>@Html.ActionLink("Aktywność", "SortujSinger", new { sortOrder = ViewBag.StatusSortParm })</th>
+                <th>Usuń</th>
+                <th>Posiadane nuty</th>
 
             </tr>
             @foreach (var item in Model)

@@ -21,6 +21,8 @@ namespace IPNuty.Models
         {
             this.SingerId = builder.singer;
             this.SheetMusicId = builder.sheetMusic;
+            this.OrderTime = builder.orderTime.Date;
+            this.Completed = builder.completed;
         }
 
         public class Builder

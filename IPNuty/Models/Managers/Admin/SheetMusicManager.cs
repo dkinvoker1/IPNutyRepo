@@ -28,11 +28,11 @@ namespace IPNuty.Models.Managers.Admin
         {
             using (var db = new ApplicationDbContext())
             {
-                //usuwanie orderów na te shhetmusicy
+                //usuwanie orderów na te sheetmusicy
                 var orderDel = db.Orders.Where(e => e.SheetMusicId.SheetMusicId == sheetMusic.SheetMusicId);
                 db.Orders.RemoveRange(orderDel);
                 //usuwanie wszystkich wystąpień w sheetmusic(z tymi które mają singerzy)
-                var del = db.SheetsOfMusic.Where(e => e.Author == sheetMusic.Author && e.Title == sheetMusic.Title && e.Type == sheetMusic.Type);
+                var del = db.SheetsOfMusic.Where(e => e.SheetMusicId==sheetMusic.SheetMusicId);
                 db.SheetsOfMusic.RemoveRange(del);
                 db.SaveChanges();
             }
