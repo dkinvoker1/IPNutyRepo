@@ -11,7 +11,6 @@ namespace IPNuty.Models.Managers.Singers
 {
     public class OrdersManager
     {
-        Order order;
 
         public void AddOrder(Order order)
         {
