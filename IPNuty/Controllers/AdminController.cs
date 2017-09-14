@@ -62,6 +62,116 @@ namespace IPNuty.Controllers
             return View(singersSheetMusicListAcctualization);
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        // usuwanie zamówień
+        public ActionResult RemoveSingerOrder(Order order)
+        {
+
+                OrdersManager orderManager = new OrdersManager();
+                orderManager.RemoveOrder(order);
+
+                ViewBag.Message = "Usunięto zamówienie!";
+                return View("Order", OrdersCollection.GetAllOrders());
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        // usuwanie zamówień
+        public ActionResult SumUp()
+        {
+            var allOrders = OrdersCollection.GetAllOrders();
+            var uniqueSheetMusic = allOrders.Where(x => x.Completed == false).GroupBy(e => e.SheetMusicId.SheetMusicId).Select(x => x.ToList()).ToList();
+
+            var uniqueForView = new List<Order>();
+            var uniqueForViewCount = new List<int>();
+
+            foreach (var item in uniqueSheetMusic)
+            {
+                var uniqueOrder = item.ToList();
+                int uniqueOrderCount = uniqueOrder.Count;
+
+                uniqueForView.Add(uniqueOrder[0]);
+                uniqueForViewCount.Add(uniqueOrderCount);
+            }
+
+            ViewBag.Count = uniqueForViewCount;
+            ViewBag.UniqueOrders = uniqueForView;
+
+            return View("Order", allOrders);
+
+        }
+
+        public ActionResult RemoveSumedUpOrder(Order order)
+        {
+            var thisOrder = order;
+
+            var allOrders = OrdersCollection.GetAllOrders();
+            var uniqueSheetMusic = allOrders.GroupBy(e => e.SheetMusicId.SheetMusicId).Select(x => x.ToList()).ToList();
+
+            var uniqueForView = new List<Order>();
+            var uniqueForViewCount = new List<int>();
+
+            foreach (var item in uniqueSheetMusic)
+            {
+                var uniqueOrder = item.ToList();
+                int uniqueOrderCount = uniqueOrder.Count;
+
+                uniqueForView.Add(uniqueOrder[0]);
+                uniqueForViewCount.Add(uniqueOrderCount);
+            }
+
+            var orderToRemove = uniqueForView.Where(x => x.OrderId == thisOrder.OrderId).FirstOrDefault();
+            var index = uniqueForView.IndexOf(orderToRemove);
+
+            uniqueForView.Remove(orderToRemove);
+            uniqueForViewCount.RemoveAt(index);
+
+            ViewBag.Count = uniqueForViewCount;
+            ViewBag.UniqueOrders = uniqueForView;
+
+            return View("Order", allOrders);
+        }
+
+        public ActionResult RemoveAllSumedUpOrder()
+        {
+
+            var allOrders = OrdersCollection.GetAllOrders();
+
+            ViewBag.Count = null;
+            ViewBag.UniqueOrders = null;
+
+            return View("Order", allOrders);
+        }
+
+        public ActionResult ChangeOrderStatus(Order order)
+        {
+
+            var allOrders = OrdersCollection.GetAllOrders();
+            var thisOrder = allOrders.Where(x => x.OrderId == order.OrderId).FirstOrDefault();
+
+            var ordersToChange = allOrders.Where(x => x.SheetMusicId.SheetMusicId == thisOrder.SheetMusicId.SheetMusicId).ToList();
+
+            OrdersManager ordersManager = new OrdersManager();
+
+            foreach (Order o in ordersToChange)
+            {
+                ordersManager.OrderStatusUpdate(o, !o.Completed);
+            }
+
+            SumUp();
+
+            if (Session["type"] != null && Session["resulttype"] != null)
+            {
+                return View("Order", allOrders);
+            }
+            else
+            {
+                return RedirectToAction("Order");
+            }
+            
+        }
         #region Singers - to jest w AccountControllerze
 
         //GET
