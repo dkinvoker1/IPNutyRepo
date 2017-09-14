@@ -321,10 +321,11 @@ namespace IPNuty.Controllers
             //var users = UserContext.Users.ToList();
             var identitySingers = UserManager.Users.ToArray();
             var identitySinger = identitySingers.Where(e => e.UserName == singerToBeDeleted.Name+singerToBeDeleted.LastName).FirstOrDefault();
-                      
+
             //tutaj to samo co wyżej ale dla orderów jak Ola zrobi
             //====================================================
-
+            OrdersManager orderMnager = new OrdersManager();
+            orderMnager.RemoveOrder(singerToBeDeleted);
             //====================================================
             //usunięcie wszystkich nut singera
             SheetMusicManager musicManager = new SheetMusicManager();

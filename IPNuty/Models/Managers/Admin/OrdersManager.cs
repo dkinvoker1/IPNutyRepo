@@ -43,6 +43,27 @@ namespace IPNuty.Models.Managers.Admin
                 }
             }
         }
+        /// <summary>
+        /// Removes all orders of singer
+        /// </summary>
+        /// <param name="singer"> singer whose order shal be removed </param>
+        public void RemoveOrder(Singer singer)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                singer = db.Singers.Where(e => e.SingerId==singer.SingerId).FirstOrDefault();
+                if (singer != null)
+                {
+                    var orders = db.Orders.Where(e => e.SingerId.SingerId == singer.SingerId).ToArray();
+                    if(orders.Length>0)
+                    {
+                        db.Orders.RemoveRange(orders);
+                        db.SaveChanges();
+                    }
+
+                }
+            }
+        }
 
         public void OrderStatusUpdate(Order order, bool completed)
         {
