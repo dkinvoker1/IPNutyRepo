@@ -1,22 +1,18 @@
 ﻿@if (Request.IsAuthenticated && User.IsInRole("Admin"))
 {
 
-    @model IPNuty.ViewModels.Admin.SingersSheetMusicListAcctualizationViewModel
+    @model  IEnumerable<IPNuty.Models.SheetMusic>
 
 
     {
         ViewBag.Title = "Lista nut osoby XYZ";
-        ViewBag.Singer = this.Model;
+        //ViewBag.Singer = this.Model;
     }
 
-    <h2>Lista nut osoby XYZ</h2>
-        <p>
-            Wyświetlamy całą bazę nut. Najpierw są wyświetlane nuty posiadane, później te nieposiadane. Istnieje możliwość dodawania nut do użytkownika i usuwania ich.<br />
-            Trzeba dostać się do danych tej jednej konkretnej osoby - jak to zrobić?
-        </p>
+    <h2>Lista nut osoby @ViewBag.Message @*@Model.FirstOrDefault().SingerID.Name @Model.FirstOrDefault().SingerID.LastName*@</h2>
+        
 
         <div>
-
 
             <table>
                 <tr>
@@ -27,13 +23,13 @@
 
                 </tr>
 
-                @foreach (var item in Model.Where(e => e.SingerID == null))
+                @foreach (var item in Model)
                 {
                     <tr>
                         <td>@item.Author</td>
                         <td>@item.Title</td>
                         <td>@item.Type</td>
-                        <td>@Html.ActionLink("Usuń nuty", "RemoveSheetMusic", item)</td>
+                        <td>@Html.ActionLink("Usuń nuty", "RemoveSingerSheetMusic", item)</td>
                     </tr>
                 }
             </table>

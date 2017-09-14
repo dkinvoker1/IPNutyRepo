@@ -10,7 +10,6 @@ namespace IPNuty.Models.Managers.Admin
 {
     public class SheetMusicManager
     {
-
         public void AddSheetMusic(SheetMusic sheetMusic) //admin dodaje nowe nuty do bazy
         {
             using (var db = new ApplicationDbContext())
@@ -21,7 +20,7 @@ namespace IPNuty.Models.Managers.Admin
 
         }
         /// <summary>
-        /// admin usuwa nuty z bazy (i wszystkie ich wystąpienia u singerów)
+        /// admin usuwa nuty z bazy (ale tylko te jedne jedyne)
         /// </summary>
         /// <param name="sheetMusic"> nuty do usunięcia</param>
         public void RemoveSheetMusic(SheetMusic sheetMusic)
@@ -33,6 +32,30 @@ namespace IPNuty.Models.Managers.Admin
                 db.Orders.RemoveRange(orderDel);
                 //usuwanie wszystkich wystąpień w sheetmusic(z tymi które mają singerzy)
                 var del = db.SheetsOfMusic.Where(e => e.SheetMusicId==sheetMusic.SheetMusicId);
+                db.SheetsOfMusic.RemoveRange(del);
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// admin usuwa nuty z bazy (Wszystkie kopie tych nut )
+        /// </summary>
+        /// <param name="sheetMusic"> nuty do usunięcia</param>
+        public void RemoveAllSheetMusic(SheetMusic sheetMusic)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                //usuwanie orderów na te sheetmusicy
+                var orderDel = db.Orders.Where(e =>
+                                                e.SheetMusicId.Author == sheetMusic.Author &&
+                                                e.SheetMusicId.Title == sheetMusic.Title &&
+                                                e.SheetMusicId.Type == sheetMusic.Type);
+                db.Orders.RemoveRange(orderDel);
+                //usuwanie wszystkich wystąpień w sheetmusic(z tymi które mają singerzy)
+                var del = db.SheetsOfMusic.Where(e => 
+                                                    e.Author == sheetMusic.Author &&
+                                                    e.Title==sheetMusic.Title &&
+                                                    e.Type==sheetMusic.Type);
                 db.SheetsOfMusic.RemoveRange(del);
                 db.SaveChanges();
             }

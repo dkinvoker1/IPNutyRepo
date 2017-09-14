@@ -47,12 +47,14 @@ namespace IPNuty.Controllers
         public ActionResult ChangeSingerActivicity(int singerId)
         {
             SingersManager singersManager = new SingersManager();
-            Singer singer = singersManager.GetSingerById(singerId);
+            //Singer singer = singersManager.GetSingerById(singerId);
+            var allSingers = SingersCollection.GetAllSingers();
+            var singer = allSingers.Where(x => x.SingerId == singerId).FirstOrDefault();
 
             singersManager.SingerActivicityUpdate(singer);
 
             var singersListAcctualization = new SingersListAcctualizationViewModel();
-            return View(singersListAcctualization.allSingersList);
+            return View("SingerListAcctualization", singersListAcctualization.allSingersList);
         }
         
         // GET: /Admin/
@@ -251,11 +253,34 @@ namespace IPNuty.Controllers
             {
                 ViewBag.Message = sheetToDelete.Author + ", " + sheetToDelete.Title +".";
                 SheetMusicManager sheetManager = new SheetMusicManager();
-                sheetManager.RemoveSheetMusic(sheet);
+                sheetManager.RemoveAllSheetMusic(sheet);
                 ModelState.Clear();
                 allSheets.Remove(sheet);
             }
             return View("SheetMusicListAcctualization", allSheets.ToList());
+        }
+
+        //GET
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult RemoveSingerSheetMusic(SheetMusic sheetToDelete)
+        {
+            SheetMusic sheet;
+            var allSheets = SheetMusicCollection.GetAllSheetMusic();
+            sheet = allSheets.Where(e => e.SheetMusicId == sheetToDelete.SheetMusicId).FirstOrDefault();
+            if (allSheets.Contains(sheet))
+            {
+                ViewBag.Message = sheetToDelete.Author + ", " + sheetToDelete.Title + ".";
+                SheetMusicManager sheetManager = new SheetMusicManager();
+                sheetManager.RemoveSheetMusic(sheet);
+                ModelState.Clear();
+                allSheets.Remove(sheet);
+            }
+            var singer = sheet.SingerID;
+            var sheets = SheetMusicCollection.GetAllSheetMusic();
+            var singerSheets = sheets.Where(e => e.SingerID != null && e.SingerID.SingerId == singer.SingerId);
+            ViewBag.Message = singer.Name+" "+singer.LastName;
+            return View("SingersSheetMusicListAcctualization", singerSheets.ToList());
         }
 
         public ActionResult Sortuj(string sortOrder)
@@ -441,6 +466,16 @@ namespace IPNuty.Controllers
             }
 
             return View("Order", orders.ToList());
+        }
+
+        // GET: /Admin/
+        public ActionResult SingerID(Singer singer)
+        {
+            
+            var sheets = SheetMusicCollection.GetAllSheetMusic();
+            var singerSheets = sheets.Where(e =>e.SingerID!=null && e.SingerID.SingerId == singer.SingerId);
+            @ViewBag.Message = singer.Name + " " + singer.LastName;
+            return View("SingersSheetMusicListAcctualization", singerSheets.ToList());
         }
     }
 }

@@ -50,15 +50,17 @@ namespace IPNuty
                 role.Name = "Admin";
                 roleManager.Create(role);
 
+
+
+            }
+
                 //============================================================================================================
                 //Here we create a Admin super user who will maintain the website                  
                 //============================================================================================================
 
                 //var user = new ApplicationUser();
-                //user.UserName = "shanu";
-                //user.Email = "syedshanumcain@gmail.com";
-
-                //string userPWD = "A@Z200711";
+                //user.UserName = "Admin";
+                //string userPWD = "ProjektIP1";
 
                 //var chkUser = UserManager.Create(user, userPWD);
 
@@ -68,8 +70,7 @@ namespace IPNuty
                 //    var result1 = UserManager.AddToRole(user.Id, "Admin");
                 //}
                 //============================================================================================================
-
-            }
+            
 
             // creating Creating Singer role    
             if (!roleManager.RoleExists("Singer"))

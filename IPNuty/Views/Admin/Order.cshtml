@@ -18,7 +18,7 @@
                 <th>@Html.ActionLink("Data złożenia zamówienia", "SortujOrder", new { sortOrder = ViewBag.DateSortParm })</th>
                 <th>@Html.ActionLink("Status zamówienia", "SortujOrder", new { sortOrder = ViewBag.StatusSortParm })</th>
                 <th>@Html.ActionLink("Nuty", "SortujOrder", new { sortOrder = ViewBag.AuthorSortParm })</th>
-                <th>Usuń</th>
+                <th>Akcja</th>
             </tr>
             @foreach (var item in Model)
             {
