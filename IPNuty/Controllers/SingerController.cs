@@ -117,10 +117,15 @@ namespace IPNuty.Controllers
             SheetMusic sheetMusic = SheetMusicCollection.GetAllSheetMusic().Where(e => e.Author == sheetToOrder.Author && e.SheetMusicId == sheetToOrder.SheetMusicId).FirstOrDefault();
 
             var thisOrder = new Order.Builder(thisSinger).SetOrderTime(DateTime.UtcNow).SetOrderStatus(false).SetOrderedSheetMusic(sheetMusic).Build();
-
+            var orders = OrdersCollection.GetAllOrders();
             if (thisSinger == null)
             {
                 ViewBag.Message = "Musisz być zalogowany aby zamówić nuty!";
+                return View("Index","Home");
+            }
+            else if (orders!=null && orders.Where(e=>e.SheetMusicId.SheetMusicId==thisOrder.SheetMusicId.SheetMusicId).FirstOrDefault()!=null)
+            {
+                ViewBag.Message = "Nie możesz zamówić nut które już są przez ciebie zamówione.";
                 return View("Order", OrdersCollection.GetAllSingerOrders(thisSinger));
             }
             else
