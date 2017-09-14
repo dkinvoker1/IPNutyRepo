@@ -222,6 +222,13 @@ namespace IPNuty.Controllers
             if (ModelState.IsValid)
             {
                 SheetMusic sheet = new SheetMusic(model.title, model.author, model.type-1);
+                var all=SheetMusicCollection.GetAllSheetMusic();
+                if(all.Where(e=>e.Author==sheet.Author && e.Title== sheet.Title && e.Type==sheet.Type).FirstOrDefault()!=null)
+                {
+                    TempData["msg"] = "<script>alert('Nie można dodać nut: w bazie istnieje już ich kopia.');</script>";
+                    ModelState.Clear();
+                    return View();
+                }
                 SheetMusicManager sheetManager = new SheetMusicManager();
                 sheetManager.AddSheetMusic(sheet);
                 TempData["msg"] = "<script>alert('Pomyślnie dodano nuty do bazy.');</script>";
